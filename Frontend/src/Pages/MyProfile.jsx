@@ -1,0 +1,111 @@
+
+// 
+// const [deletedId, setDeletedId] = useState(null);
+
+// const Navigate = useNavigate();
+
+
+
+// const handleDelete = async (blogId) => {
+//     try {
+//         await axios.delete(`http://localhost:4000/${blogId}`, { withCredentials: true });
+//         setData((prev) => prev.filter((blog) => blog._id !== blogId));
+//         setDeletedId(null);
+//         toast.success("deleted successfully...");
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+// 
+
+// return (
+//     <div className="card_container">
+
+//         
+//         }
+//     </div>
+// )
+// }
+
+// export default MyProfile;
+
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useSelector } from "react-redux";
+import './MyProfile.css';
+import Myblogs from './Myblogs';
+
+const MyProfile = () => {
+
+    const user = useSelector((store) => store.user?.user);
+
+    const [data, setData] = useState([]);
+
+    const fetchBlogs = async () => {
+        const response = await axios.get('http://localhost:4000/myblog', { withCredentials: true });
+        setData(response?.data);
+    }
+
+    useEffect(() => { fetchBlogs() }, []);
+
+    return (
+        <div className="myprofile-container">
+            {/* Upper Container */}
+            <div className="upper-container">
+                {/* Left Side: Profile */}
+                <div className="profile-left">
+                    <img
+                        src={user?.existUser?.profilePic}
+                        alt="Profile"
+                        className="profile-image"
+                    />
+                    <h2 className="profile-name">
+                        {user?.existUser?.firstname} {user?.existUser?.lastname}
+                    </h2>
+                </div>
+
+                {/* Right Side: Stats */}
+                <div className="profile-right">
+                    <div className="profile-stat">
+                        <span className="stat-number">{user?.existUser?.followers?.length}</span>
+                        <span className="stat-label">Followers</span>
+                    </div>
+                    <div className="profile-stat">
+                        <span className="stat-number">{user?.existUser?.following?.length}</span>
+                        <span className="stat-label">Following</span>
+                    </div>
+                    <div className="profile-stat">
+                        <span className="stat-number">{data?.length}</span>
+                        <span className="stat-label">Blogs</span>
+                    </div>
+                </div>
+            </div>
+
+            {/* Lower Container */}
+            <div className="lower-container">
+                <h3>Your Blogs</h3>
+                {
+                    data?.length > 0 ? (
+                        data.map((e, _) => {
+                            return (
+                                <div key={e._id} className="card">
+                                    <Myblogs props={e} />
+                                </div>
+                            )
+                        })
+                    ) : (
+                        <div className="no-blog">
+                            <h1>You don't have any blog...</h1>
+                        </div>
+                    )
+                }
+            </div>
+        </div>
+    );
+};
+
+export default MyProfile;
+
+
