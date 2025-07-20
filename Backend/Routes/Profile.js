@@ -57,5 +57,22 @@ profileRoute.put('/profile/edit', upload.single('profilePic'), async (req, res) 
 })
 
 
+// Get the Followers 
+profileRoute.get('/followers', async (req, res) => {
+    try {
+        const userId = req.user._id;
+
+        const user = await User.findById(userId).populate('followers','firstname lastname email profilePic');
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.status(200).json({ followers: user.followers })
+    } catch (err) {
+        console.error('Error fetching followers:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+})
 
 export default profileRoute;

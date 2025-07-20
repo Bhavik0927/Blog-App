@@ -227,25 +227,22 @@ blogRoute.put('/follow/:id', async (req, res) => {
     const current_userId = req.user._id;
     const target_userId = req.params.id;
 
-    console.log("target ", target_userId);
-    console.log("current ", current_userId);
-
     if (current_userId.toString() === target_userId.toString()) {
         return res.status(400).json({ err: "You can't follow userself" });
     }
-
-    const currentUser = await User.findById(current_userId);
-    const targetUser = await User.findById(target_userId);
-
-    const isFollowing = currentUser.following.includes(targetUser);
-
     try {
+        const currentUser = await User.findById(current_userId);
+        const targetUser = await User.findById(target_userId);
+
+        const isFollowing = currentUser.following.includes(target_userId);
+
+
         if (isFollowing) {
-            currentUser.following.pull(targetUser);
-            targetUser.followers.pull(currentUser);
+            currentUser.following.pull(target_userId);
+            targetUser.followers.pull(current_userId);
         } else {
-            currentUser.following.push(targetUser);
-            targetUser.followers.push(currentUser);
+            currentUser.following.push(target_userId);
+            targetUser.followers.push(current_userId);
         }
 
         await currentUser.save();
