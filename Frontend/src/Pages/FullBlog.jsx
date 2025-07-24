@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import './FullBlog.css';
+import '../CSS/FullBlog.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PiHandsClapping } from "react-icons/pi";

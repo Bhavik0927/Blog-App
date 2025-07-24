@@ -1,4 +1,4 @@
-import './HomeDesign.css';
+import '../CSS/HomeDesign.css';
 import ideas from '../Images/ideas.png';
 
 const HomeDesign = () => {

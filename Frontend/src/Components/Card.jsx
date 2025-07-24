@@ -2,7 +2,7 @@ import { BsStars } from "react-icons/bs";
 import { CiBookmarkCheck } from "react-icons/ci";
 import axios from "axios";
 import { toast } from 'react-toastify';
-import './Card.css';
+import '../CSS/Card.css';
 import { FaHandsClapping } from "react-icons/fa6";
 import { useState } from "react";
 import { useSelector } from 'react-redux';

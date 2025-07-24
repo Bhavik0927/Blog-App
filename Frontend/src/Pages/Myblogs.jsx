@@ -86,20 +86,20 @@
 
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { MdDelete } from "react-icons/md";
-import { RiEdit2Fill } from "react-icons/ri";
 import { toast } from "react-toastify";
 import axios from 'axios';
-import './Myblogs.css';
+import '../CSS/Myblogs.css';
 import { BsStars } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { CiBookmarkCheck } from "react-icons/ci";
+import { useHref } from 'react-router-dom';
+import { CiEdit } from "react-icons/ci";
 
 const Myblogs = ({ props }) => {
-    console.log(props);
 
+    const link = useHref();
+    const Navigate = useNavigate();
+    
     const savedBlog = async () => {
         try {
             const response = await axios.post('http://localhost:4000/saveblog', { blogId: props._id }, { withCredentials: true });
@@ -109,6 +109,8 @@ const Myblogs = ({ props }) => {
         }
 
     }
+
+    console.log(props._id);
 
     return (
         <div className="main_card_info">
@@ -139,7 +141,9 @@ const Myblogs = ({ props }) => {
 
                     </p>
                 </div>
-                <span className="bookmark" onClick={() => savedBlog()}> <CiBookmarkCheck /> </span>
+                <div className="bookmark" >
+                    {link === '/myprofile' ? <CiEdit onClick={() => Navigate(`/editblog/${props._id}`)} />   : <CiBookmarkCheck onClick={() => savedBlog()} />}
+                </div>
             </div>
         </div>
     )

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import './saveblog.css';
+import '../CSS/saveblog.css';
 import { FaBookmark } from "react-icons/fa";
 
 const SaveBlogs = () => {

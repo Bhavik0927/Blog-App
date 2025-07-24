@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { removeUser } from '../Store/UserSlice';
 import { persistor } from '../Store/Store';
-import './Navbar.css';
+import '../CSS/Navbar.css';
 import { toast } from 'react-toastify';
 import { RiEditBoxLine } from "react-icons/ri";
 import { IoIosSearch } from "react-icons/io";

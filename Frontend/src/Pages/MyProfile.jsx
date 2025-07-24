@@ -34,12 +34,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from "react-redux";
-import './MyProfile.css';
+import '../CSS/MyProfile.css';
 import Myblogs from './Myblogs';
 
 const MyProfile = () => {
 
     const user = useSelector((store) => store.user?.user);
+
 
     const [data, setData] = useState([]);
 
@@ -57,23 +58,25 @@ const MyProfile = () => {
                 {/* Left Side: Profile */}
                 <div className="profile-left">
                     <img
-                        src={user?.existUser?.profilePic}
+                        src={user?.profilePic || user?.existUser?.profilePic}
                         alt="Profile"
                         className="profile-image"
                     />
                     <h2 className="profile-name">
-                        {user?.existUser?.firstname} {user?.existUser?.lastname}
+                        {user?.firstname || user?.existUser?.firstname} {user?.lastname || user?.existUser?.lastname}
                     </h2>
                 </div>
 
-                {/* Right Side: Stats */}
+                {/* Right Side: Stats */} 
                 <div className="profile-right">
                     <div className="profile-stat">
-                        <span className="stat-number">{user?.existUser?.followers?.length}</span>
+                        <span className="stat-number">
+                            {user?.followers?.length || user?.existUser?.followers?.length}
+                        </span>
                         <span className="stat-label">Followers</span>
                     </div>
                     <div className="profile-stat">
-                        <span className="stat-number">{user?.existUser?.following?.length}</span>
+                        <span className="stat-number">{user?.following?.length || user?.existUser?.following?.length}</span>
                         <span className="stat-label">Following</span>
                     </div>
                     <div className="profile-stat">

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addBlog } from "../Store/BlogSlice";
-import './home.css';
+import '../CSS/home.css';
 import HomeDesign from "./HomeDesign";
 import Card from "../Components/Card";
 
@@ -19,6 +19,7 @@ const Home = () => {
             const res = await axios.get('http://localhost:4000/view', {
                 withCredentials: true,
             });
+            // console.log(res);
             setData(res?.data?.data);
             dispatch(addBlog(res?.data?.data));
         } catch (error) {

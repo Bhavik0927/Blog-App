@@ -1,32 +1,47 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import '../CSS/EditBlog.css';
+
 
 const EditBlog = () => {
 
     const { id } = useParams();
+    // console.log("param-id", id);
+
     const Navigate = useNavigate();
-    const blogs = useSelector((state) => state?.blog?.blog || []);
-
-    const blogToEdit = blogs.find((b) => b._id === id);
-
+    const [data, setData] = useState(null);
 
     const [title, setTitle] = useState('');
     const [blog, setBlog] = useState('');
     const [blogImage, setBlogImage] = useState('');
 
-    useEffect(() => {
-        if (blogToEdit) {
-            setTitle(blogToEdit.title);
-            setBlog(blogToEdit.blog);
-            setBlogImage(blogToEdit.blogImage);
+    const FetchBlog = async () => {
+        try {
+            const response = await axios.get(`http://localhost:4000/blog/${id}`, { withCredentials: true });
+
+            setData(response?.data?.data);
+
+        } catch (error) {
+            console.log(error.message);
         }
-    }, [blogToEdit]);
+    }
 
+    
 
+    useEffect(() => {
+        FetchBlog();
+    }, [id]);
+
+    useEffect(() => {
+        if(data){
+            setTitle(data.title || '');
+            setBlog(data.blog || "");
+            setBlogImage(data.blogImage || "");
+        }
+    },[data])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -50,57 +65,63 @@ const EditBlog = () => {
         }
 
         try {
-            const res = await axios.put(`http://localhost:4000/blog/${id}`, {
+             await axios.put(`http://localhost:4000/blog/${id}`, {
                 title,
                 blog,
                 blogImage: imageUrl
             }, { withCredentials: true });
 
             toast.success("blog-data is updated...");
-            Navigate('/myblogs')
+
+            Navigate('/myprofile');
         } catch (error) {
             console.log(error);
         }
 
     }
 
+
+    if(!data){ return <p>Loading...</p> };
+
     return (
-        <form onSubmit={handleSubmit} style={{ padding: '20px' }}>
+        <div className='Edit-Container'>
+            <form onSubmit={handleSubmit} >
 
-            <div id="title_area">
-                <label htmlFor="title">Title</label>
+                <div id="title_area">
+                    <label htmlFor="title">Title</label>
+                    <input
+                        id="title"
+                        type="text"
+                        value={title}
+                        placeholder="Title for blog"
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                </div>
+                <div id="blog_area">
+                    <label htmlFor="textarea">Blog</label>
+
+                    <textarea
+                        id="textarea"
+                        value={blog}
+                        placeholder="Write an blog"
+                        onChange={(e) => setBlog(e.target.value)}
+                    />
+                </div>
+
                 <input
-                    id="title"
-                    type="text"
-                    value={title}
-                    placeholder="Title for blog"
-                    onChange={(e) => setTitle(e.target.value)}
+                    type="file"
+                    onChange={(e) => {
+                        setBlogImage(e.target.files[0]);
+                    }}
+                    className={{ marginBottom: "10px", color: "#fff" }}
                 />
-            </div>
-            <div id="blog_area">
-                <label htmlFor="textarea">Blog</label>
-
-                <textarea
-                    id="textarea"
-                    value={blog}
-                    placeholder="Write an blog"
-                    onChange={(e) => setBlog(e.target.value)}
-                />
-            </div>
-
-            <input
-                type="file"
-                onChange={(e) => {
-                    setBlogImage(e.target.files[0]);
-                }}
-                className={{ marginBottom: "10px", color: "#fff" }}
-            />
 
 
-            <div className='close-area'>
-                <button className="close-btn" type='submit' >submit</button>
-            </div>
-        </form>
+                <div className='close-area'>
+                    <button className="close-btn" type='submit' >submit</button>
+                </div>
+            </form>
+        </div>
     )
 }
 

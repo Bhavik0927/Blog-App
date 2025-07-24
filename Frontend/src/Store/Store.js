@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './UserSlice';
 import blogReducer from './BlogSlice';
+import followerReducer from './FollowerSlice';
 import saveblogsReducer from './SaveBlogs';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage
@@ -17,7 +18,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     user: userReducer,
     blog: blogReducer,
-    saveblogs: saveblogsReducer
+    saveblogs: saveblogsReducer,
+    follower: followerReducer
 })
 
 
