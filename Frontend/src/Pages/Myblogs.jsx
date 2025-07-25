@@ -1,105 +1,20 @@
-// import React from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { useState } from 'react';
-// import { MdDelete } from "react-icons/md";
-// import { RiEdit2Fill } from "react-icons/ri";
-// import { toast } from "react-toastify";
-// import axios from 'axios';
-// import './Myblogs.css';
 
-
-
-// const Myblogs = ({data}) => {
-
-//     const [deletedId, setDeletedId] = useState(null);
-//     // const [data, setData] = useState();
-
-//     const Navigate = useNavigate();
-
-//     // const handleDelete = async (blogId) => {
-//     //     try {
-//     //         await axios.delete(`http://localhost:4000/${blogId}`, { withCredentials: true });
-//     //         setData((prev) => prev.filter((blog) => blog._id !== blogId));
-//     //         setDeletedId(null);
-//     //         toast.success("deleted successfully...");
-//     //     } catch (error) {
-//     //         console.log(error);
-//     //     }
-//     // }
-
-//     return (
-//         <div>
-//             {data?.length > 0 ? (
-//                 data?.map((e, _) => {
-//                     return (
-//                         <div key={e._id} className="card" >
-//                             <div className="edit-header" style={{ display: 'flex', justifyContent: 'space-between' }} >
-//                                 <div>
-//                                     <img className="blog-image" src={e?.blogImage} alt="" />
-//                                     <h2>{e.title}</h2>
-
-//                                     <div style={{ fontSize: '25px', display: 'flex', gap: '10px', cursor: 'pointer' }}>
-//                                         <MdDelete onClick={() => setDeletedId(e._id)} />
-//                                         <RiEdit2Fill onClick={() => Navigate(`/editBlog/${e._id}`)} />
-//                                     </div>
-//                                 </div>
-//                                 {
-//                                     deletedId === e._id && (
-//                                         <div className="confirm-overlay">
-//                                             <div className="confirm-card">
-//                                                 <p>Are you sure you want to delete this blog?</p>
-//                                                 <div className="confirm-buttons">
-//                                                     {/* <button className="confirm-yes" onClick={() => { handleDelete(e._id) }}>Yes </button> */}
-//                                                     <button className="confirm-no" onClick={() => setDeletedId(null)}>
-//                                                         No
-//                                                     </button>
-//                                                 </div>
-//                                             </div>
-//                                         </div>
-//                                     )
-//                                 }
-//                             </div>
-
-//                             <div >
-//                                 <p>{e.blog}</p>
-//                             </div>
-
-//                             <div className="name_date_box" >
-//                                 <h4>{new Date(e.createdAt).toLocaleDateString('en-CA')}</h4>
-//                             </div>
-//                         </div>
-//                     )
-//                 })
-//             ) : (
-//                 <div className="no-blog">
-//                     <h1>You don't have any blog...</h1>
-//                 </div>
-//             )
-//             }
-//         </div>
-//     )
-// }
-
-// export default Myblogs
-
-
-
-
-import React from 'react';
 import { toast } from "react-toastify";
 import axios from 'axios';
-import '../CSS/Myblogs.css';
+// import '../CSS/Myblogs.css';
 import { BsStars } from "react-icons/bs";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CiBookmarkCheck } from "react-icons/ci";
 import { useHref } from 'react-router-dom';
 import { CiEdit } from "react-icons/ci";
+import { MdDelete } from "react-icons/md";
 
-const Myblogs = ({ props }) => {
+const Myblogs = ({ props,onDelete,showConfirm,setShowConfirm }) => {
 
     const link = useHref();
     const Navigate = useNavigate();
-    
+
+
     const savedBlog = async () => {
         try {
             const response = await axios.post('http://localhost:4000/saveblog', { blogId: props._id }, { withCredentials: true });
@@ -110,7 +25,18 @@ const Myblogs = ({ props }) => {
 
     }
 
-    console.log(props._id);
+    const handleDeleteClick = () => {
+        setShowConfirm(true);
+    };
+
+    const confirmDelete = () => {
+        onDelete(props._id);
+        setShowConfirm(false);
+    };
+
+    const cancelDelete = () => {
+        setShowConfirm(false);
+    };
 
     return (
         <div className="main_card_info">
@@ -142,9 +68,28 @@ const Myblogs = ({ props }) => {
                     </p>
                 </div>
                 <div className="bookmark" >
-                    {link === '/myprofile' ? <CiEdit onClick={() => Navigate(`/editblog/${props._id}`)} />   : <CiBookmarkCheck onClick={() => savedBlog()} />}
+                    {
+                        link === '/myprofile' ? (
+                            <>
+                                <CiEdit onClick={() => Navigate(`/editblog/${props._id}`)} /> <MdDelete onClick={() => { handleDeleteClick(props._id) }} />
+                            </>
+                        ) :
+                            <CiBookmarkCheck onClick={() => savedBlog()} />
+                    }
                 </div>
             </div>
+            {/* Confirm Delete Modal */}
+            {showConfirm && (
+                <div className="modal-overlay1">
+                    <div className="confirm-box1">
+                        <p>Are you sure you want to delete this blog?</p>
+                        <div className="confirm-buttons1">
+                            <button className="confirm-btn1 delete1" onClick={confirmDelete}>Yes, Delete</button>
+                            <button className="confirm-btn1 cancel1" onClick={cancelDelete}>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
