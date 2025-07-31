@@ -8,11 +8,13 @@ import { CiBookmarkCheck } from "react-icons/ci";
 import { useHref } from 'react-router-dom';
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
+import { useSelector } from "react-redux";
 
-const Myblogs = ({ props,onDelete,showConfirm,setShowConfirm }) => {
+const Myblogs = ({ props, onDelete, showConfirm, setShowConfirm }) => {
 
     const link = useHref();
     const Navigate = useNavigate();
+    const user = useSelector(state => state.user?.user?.existUser);
 
 
     const savedBlog = async () => {
@@ -38,12 +40,17 @@ const Myblogs = ({ props,onDelete,showConfirm,setShowConfirm }) => {
         setShowConfirm(false);
     };
 
+     const firstName = user?.firstname.toLowerCase();
+     const lastName = user?.lastname.toLowerCase();
+     const title = props?.title.split(' ').join('-');
+    
+
     return (
         <div className="main_card_info">
 
             <div className="main_content_container">
                 <div className="content_block" >
-                    <Link to="">
+                    <Link to={`/@${firstName}${lastName}/${title}/${props._id}`}>
                         <h3 className="title">Today I Learned Something About My Boyfriend That No Girl Should Ever Have to   </h3>
                         <p className="paragraph">For the writer who doesn’t think they have anything to offer  and why you're dead wrong
                         </p>

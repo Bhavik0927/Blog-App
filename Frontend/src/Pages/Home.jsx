@@ -5,6 +5,7 @@ import { addBlog } from "../Store/BlogSlice";
 import '../CSS/home.css';
 import HomeDesign from "./HomeDesign";
 import Card from "../Components/Card";
+import RightCard from "../Components/RightCard";
 
 const Home = () => {
 
@@ -13,13 +14,19 @@ const Home = () => {
 
 
     const [data, setData] = useState([]);
+    const [shaffleData, setShaffleData] = useState([]);
 
     const fetchBlogs = async () => {
         try {
             const res = await axios.get('http://localhost:4000/view', {
                 withCredentials: true,
             });
-            // console.log(res);
+
+            const blogs = res?.data?.data;
+            let random = Math.floor(Math.random() * blogs.length);
+            const shuffle_It = blogs[random];
+
+            setShaffleData(shuffle_It);
             setData(res?.data?.data);
             dispatch(addBlog(res?.data?.data));
         } catch (error) {
@@ -63,7 +70,8 @@ const Home = () => {
                             </div>
 
                             <div className="right_container">
-                                <h2>Right side portion</h2>
+                                <h3>Stiff Picks</h3>
+                                <RightCard data={shaffleData} />
                             </div>
                         </div>
                     ) : (

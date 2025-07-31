@@ -58,7 +58,7 @@ const Card = ({ props }) => {
                 <div className="main_content_container">
                     <div className="content_block" >
                         <Link to={`/@${firstName}${lastName}/${title}/${props._id}`}>
-                            <h3 className="title">Today I Learned Something About My Boyfriend That No Girl Should Ever Have to   </h3>
+                            <h3 className="title">{props?.title}  </h3>
                             <p className="paragraph">For the writer who doesn’t think they have anything to offer  and why you're dead wrong
                             </p>
                         </Link>

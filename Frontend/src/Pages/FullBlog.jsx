@@ -32,8 +32,7 @@ const FullBlog = () => {
 
 
     const user = useSelector((store) => store.user?.user);
-
-    const current_user = user?.existUser._id;
+    const current_user = user?._id || user?.existUser._id;
     const target_userId = target;
 
     const savedBlog = async () => {
@@ -64,10 +63,10 @@ const FullBlog = () => {
 
         ; (async () => {
             const Response = await axios.get(`http://localhost:4000/blog/${id}`, { withCredentials: true });
-            // console.log(Response.data.data);
+        
             setBlog(Response?.data?.data);
             setTarget(Response?.data?.data?.createdBy._id);
-            // console.log(Response?.data?.data?.createdBy._id);
+        
         })()
     }, [])
 
