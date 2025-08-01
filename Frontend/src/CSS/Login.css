@@ -114,9 +114,11 @@
 /* Mobile (max-width: 768px) */
 @media (max-width: 768px) {
   .login-container {
+    /* border: 1px solid red; */
     flex-direction: column;
-    height: auto;
+    height:100dvh;
     width: 100%;
+    /* overflow-y: hidden; */
   }
 
   .left-panel {

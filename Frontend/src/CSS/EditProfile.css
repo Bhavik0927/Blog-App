@@ -1,20 +1,82 @@
-.profile_container{
-    padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.Profile_Container1 {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 0.6rem;
 }
 
-#title_box,
-#blog_box{
-    width: 40%;
-    
+.profile-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
 }
 
-input{
-    height: 2.5rem;
-    padding-left: 0.5rem;
-    border-radius: 0.3rem;
-    font-size: 1rem;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="file"] {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+}
+
+.form-group input[type="file"] {
+  padding: 0.5rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.submit-btn {
+  background-color: #333;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #555;
+}
+
+.submit-btn:disabled {
+  background-color: #888;
+  cursor: not-allowed;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .form-group input,
+  .submit-btn {
+    width: 100%;
+  }
+
+  .profile-title {
+    font-size: 1.3rem;
+  }
 }

@@ -49,7 +49,7 @@ const Home = () => {
                 user ? (
                     data.length > 0 ? (
                         <div className="main_container">
-                            <div className="left_container">
+                            <div className="left_container1">
                                 <div className="feature_container">
                                     <p className="feature_btn">+</p>
                                     <p className="feature_btn">For you</p>

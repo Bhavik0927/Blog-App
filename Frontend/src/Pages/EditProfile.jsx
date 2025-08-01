@@ -4,7 +4,7 @@ import axios from 'axios';
 import { addUser } from '../Store/UserSlice.js';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import '../CSS/EditProfile.css'; 
+import '../CSS/EditProfile.css'
 
 const EditProfile = () => {
 
@@ -14,9 +14,9 @@ const EditProfile = () => {
     const dispatch = useDispatch();
     const Navigate = useNavigate();
 
-    const [firstname, setFirstname] = useState(user?.existUser?.firstname||user?.firstname || '');
-    const [lastname, setLastName] = useState(user?.existUser?.lastname ||user?.lastname ||'');
-    const [email, setEmail] = useState(user?.existUser?.email || user?.email ||'');
+    const [firstname, setFirstname] = useState(user?.existUser?.firstname || user?.firstname || '');
+    const [lastname, setLastName] = useState(user?.existUser?.lastname || user?.lastname || '');
+    const [email, setEmail] = useState(user?.existUser?.email || user?.email || '');
     const [profilePic, setProfilePic] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -57,9 +57,9 @@ const EditProfile = () => {
 
     return (
 
-        <form onSubmit={handleSubmit} className='profile_container'>
+        <form onSubmit={handleSubmit} className='Profile_Container1'>
 
-            <div id="title_box">
+            <div className='form-group'>
                 <label htmlFor="title">FirstName</label>
                 <input
                     id="title"
@@ -69,7 +69,7 @@ const EditProfile = () => {
                     onChange={(e) => setFirstname(e.target.value)}
                 />
             </div>
-            <div id="blog_box">
+            <div className='form-group'>
                 <label htmlFor="textarea">LastName</label>
 
                 <input
@@ -80,7 +80,7 @@ const EditProfile = () => {
                 />
             </div>
 
-            <div id="title_area">
+            <div className='form-group'>
                 <label htmlFor="title">Email</label>
                 <input
                     id="email"
@@ -91,18 +91,18 @@ const EditProfile = () => {
                 />
             </div>
 
-            <div>
-            <input
-                type="file"
-                onChange={(e) => {
-                    setProfilePic(e.target.files[0]);
-                }}
-                className={{ marginBottom: "10px", color: "#fff" }}
-            />
-</div>
+            <div className='form-group'>
+                <input
+                    type="file"
+                    onChange={(e) => {
+                        setProfilePic(e.target.files[0]);
+                    }}
+                    
+                />
+            </div>
 
-            <div className='close-area'>
-                <button className="close-btn" type='submit' disabled={loading} >
+            <div className='form-actions'>
+                <button className="submit-btn" type='submit' disabled={loading} >
                     {loading ? "Loading..." : "Submit"}
                 </button>
             </div>

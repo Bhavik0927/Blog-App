@@ -1,15 +1,16 @@
 .main_container {
   display: flex;
+  justify-content: center;
   gap: 2rem;
-  padding-left: 50px;
+  padding: 0rem 4.5rem;
 }
-.left_container {
+.left_container1 {
   width: 67%;
+  padding: 0rem;
 }
 .feature_container {
-
   display: flex;
-  align-items: center;  
+  align-items: center;
   border-bottom: 1px solid var(--border);
   height: 4.5rem;
   padding-left: 2.5rem;
@@ -24,10 +25,9 @@
   font-weight: 500;
   transition: 0.3s all ease;
 }
-.feature_container .feature_btn:hover{
+.feature_container .feature_btn:hover {
   color: var(--primary-color);
 }
-
 
 .card {
   display: flex;
@@ -36,11 +36,26 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 5px;
-  padding: 0rem 0.3rem;
+  /* padding: 0rem 0.3rem; */
 }
 
 .right_container {
-  width: 32%;
-  border-left: 1px solid var(--border);
+  width: 27%;
+  /* border-left: 1px solid var(--border); */
+  border: 1px solid red;
   padding: 0.5rem 1.4rem;
+}
+
+
+@media (max-width: 800px) {
+  .main_container {
+    justify-content: center;
+    padding: 1rem 1.5rem;
+  }
+  .left_container1 {
+    width: 100%;
+  }
+  .right_container {
+    display: none;
+  }
 }

@@ -2,6 +2,7 @@
   width: 100%;
   height: auto;
   padding: 0.6rem 0rem;
+  /* border: 1px solid darkcyan; */
 }
 .created_user_container {
   display: flex;
@@ -26,7 +27,7 @@
   padding: 0;
   margin: 0.6rem 0rem;
   display: flex;
-  flex-wrap: wrap-reverse;
+  /* flex-wrap: wrap-reverse; */
   gap: 2rem;
 }
 
