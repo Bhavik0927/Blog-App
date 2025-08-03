@@ -28,7 +28,7 @@ const FullBlog = () => {
     const [showCard2, setShowCard2] = useState(false);
     const [customUrl, setCustomUrl] = useState();
     const [isFollowing, setIsFollowing] = useState(false);
-    const [target, setTarget] = useState();
+    const [target, setTarget] = useState(null);
 
 
     const user = useSelector((store) => store.user?.user);
@@ -56,11 +56,6 @@ const FullBlog = () => {
     }
 
     useEffect(() => {
-        if (current_user?.following?.includes(target_userId)) {
-
-            setIsFollowing(true);
-        }
-
         ; (async () => {
             const Response = await axios.get(`http://localhost:4000/blog/${id}`, { withCredentials: true });
         
@@ -68,8 +63,10 @@ const FullBlog = () => {
             setTarget(Response?.data?.data?.createdBy._id);
         
         })()
-    }, [])
+    }, [id])
 
+     if (!blog) return <p>Loading...</p>;
+     
     return (
         <div className='fullblog_maincontainer'>
             <div className='fullblog_container'>
