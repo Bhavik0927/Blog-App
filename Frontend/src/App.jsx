@@ -6,7 +6,6 @@ import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import { Provider } from 'react-redux';
 import store from './Store/Store';
-import AddBlogCard from './Components/AddBlogCard';
 import EditBlog from './Pages/EditBlog';
 import { lazy, Suspense } from 'react';
 
@@ -14,6 +13,7 @@ const EditProfile = lazy(() => import('./Pages/EditProfile'));
 const Myblogs = lazy(() => import('./Pages/MyProfile'));
 const SaveBlogs = lazy(() => import('./Pages/SaveBlogs'));
 const FullBlog = lazy(() => import('./Pages/FullBlog'));
+const AddBlogCard = lazy(() => import("./Components/AddBlogCard"));
 
 const App = () => {
   return (
