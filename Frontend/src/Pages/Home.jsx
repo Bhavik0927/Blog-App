@@ -5,7 +5,7 @@ import { addBlog } from "../Store/BlogSlice";
 import '../CSS/home.css';
 import HomeDesign from "./HomeDesign";
 import Card from "../Components/Card";
-import RightCard from "../Components/RightCard";
+import RightCard from "../Components/RightCard";   
 
 const Home = () => {
 

@@ -22,7 +22,7 @@ app.use(cors({
 app.use(express.json()); 
 app.use(cookieParser());
 
-app.use('/',AuthMiddleware,authRouter);
+app.use('/',authRouter);
 app.use('/',AuthMiddleware,profileRoute);
 app.use('/',AuthMiddleware,blogRoute);
 

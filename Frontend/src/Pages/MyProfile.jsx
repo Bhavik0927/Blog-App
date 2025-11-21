@@ -1,36 +1,3 @@
-
-// 
-// const [deletedId, setDeletedId] = useState(null);
-
-// const Navigate = useNavigate();
-
-
-
-// const handleDelete = async (blogId) => {
-//     try {
-//         await axios.delete(`http://localhost:4000/${blogId}`, { withCredentials: true });
-//         setData((prev) => prev.filter((blog) => blog._id !== blogId));
-//         setDeletedId(null);
-//         toast.success("deleted successfully...");
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
-
-// 
-
-// return (
-//     <div className="card_container">
-
-//         
-//         }
-//     </div>
-// )
-// }
-
-// export default MyProfile;
-
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from "react-redux";

@@ -1,9 +1,9 @@
-import React from 'react';
+
 import '../CSS/RightCard.css';
 
 
-const RightCard = ({data}) => {
-  console.log(data);
+const RightCard = ({data}) => { 
+  console.log(data);  
   return (
     <div className='Card-container'>
 

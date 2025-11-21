@@ -10,7 +10,7 @@ const Body = () => {
     const user = useSelector((state) => state.user?.user);
 
     const fetchUser = async () => {
-        if (user) return;
+        if (!user) return;
 
         try {
             const res = await axios.get('http://localhost:4000/profile', { withCredentials: true });

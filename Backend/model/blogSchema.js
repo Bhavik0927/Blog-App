@@ -20,18 +20,6 @@ const BlogSchema = new mongoose.Schema(
     },
     categories: {
       type: String,
-      enum: [
-        "Data Science",
-        "Self Improvement",
-        "Writing",
-        "Relationship",
-        "Technologies",
-        "Web Development",
-        "Law",
-        "Politics",
-        "Productivity",
-        "Other",
-      ],
       required: true,
     },
     createdBy: {

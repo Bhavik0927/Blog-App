@@ -1,3 +1,8 @@
 .Card-container{
     border: 1px solid thistle;
 }
+
+.Card-container h3{
+    font-family: var(--secondary-color);
+
+}

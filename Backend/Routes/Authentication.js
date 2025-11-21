@@ -14,7 +14,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 authRouter.post("/signup", upload.single('profilePic'), async (req, res) => {
 
     try {
-        const { firstname, lastname, email, password } = req.body;
+        const { firstname, lastname, email, password,categories } = req.body;
 
         if (!firstname || !lastname || !email || !password || !req.file) {
             return res.status(400).json({ message: "All fields including profilePic are required" });
@@ -34,11 +34,12 @@ authRouter.post("/signup", upload.single('profilePic'), async (req, res) => {
 
 
         const newUser = new User({
-            firstname,
-            lastname,
-            email,
-            password: hashPassword,
-            profilePic: result.secure_url,
+          firstname,
+          lastname,
+          email,
+          password: hashPassword,
+          profilePic: result.secure_url,
+          categories,
         });
 
         await newUser.save();
@@ -49,7 +50,7 @@ authRouter.post("/signup", upload.single('profilePic'), async (req, res) => {
 
         res.status(200).send({ message: "User is created", user: userWithoutPassword });
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
     }
 })
 
