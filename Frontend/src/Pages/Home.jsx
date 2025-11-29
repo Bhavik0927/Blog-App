@@ -18,7 +18,7 @@ const Home = () => {
 
     const fetchBlogs = async () => {
         try {
-            const res = await axios.get('http://localhost:4000/view', {
+            const res = await axios.get('http://localhost:4000/view', { 
                 withCredentials: true,
             });
 
@@ -61,7 +61,7 @@ const Home = () => {
                                         data.map((e, _) => {
                                             return (
                                                 <div key={e._id} className="card">
-                                                    <Card props={e} />
+                                                    <Card props={e} /> 
                                                 </div>
                                             )
                                         })

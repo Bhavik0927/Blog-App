@@ -25,6 +25,7 @@ const AddBlogCard = () => {
     formData.append("subtitle", subtitle);
     formData.append("blog", blog);
     formData.append("blogImage", blogImage);
+    formData.append("categories", categories);
 
     try {
       await axios.post("http://localhost:4000/create", formData, {

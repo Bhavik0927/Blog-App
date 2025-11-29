@@ -26,7 +26,7 @@ const Signup = () => {
     formData.append("email", email);
     formData.append("password", password);
     formData.append("profilePic", profilePic);
-    formData.append("categories", JSON.stringify(categories));
+    formData.append("categories", categories);
     try {
       const res = await axios.post("http://localhost:4000/signup", formData, {
         headers: {

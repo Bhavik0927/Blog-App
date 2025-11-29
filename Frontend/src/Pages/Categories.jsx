@@ -1,34 +1,11 @@
 import "../CSS/Categories.css";
+import {CategorieTypes} from '../Components/Constant';
 
-const category = [
-  "Web Development",
-  "Science",
-  "LifeStyle",
-  "Movie",
-  "Fashion",
-  "Cars",
-  "Pets",
-  "Cultures",
-  "Others",
-  "Politics",
-  "Engineering",
-  "Food",
-  "Cuisins",
-  "Photography",
-  "Wild Life",
-  "Bikes",
-  "Sports",
-  "Machines",
-  "National Geography",
-  "Anime",
-  "Hentai",
-  'Crypto',
-  "Bitcoin",
-  "Forbs",
-  "Celebraties"
-];
+
 
 const Categories = ({ categories, setCategories, prevStep, submit }) => {
+
+
   const toggleCategory = (data) => {
     if (categories.includes(data)) {
       setCategories(categories.filter((c) => c != data));
@@ -36,15 +13,19 @@ const Categories = ({ categories, setCategories, prevStep, submit }) => {
       setCategories([...categories, data]);
     }
   };
+
+
   return (
     <div className="Main_container">
       <form>
-        <h2>Select Your Intrest</h2>
+        <h1 style={{ fontFamily: "var(--primary-font)" }}>
+          Select Your Intrest
+        </h1>
         <div className="Category_container">
-          {category.map((data, index) => (
+          {CategorieTypes.map((data, index) => (
             <div>
               <button
-                key={index}
+                key={data}
                 type="button"
                 onClick={() => toggleCategory(data)}
                 style={{
