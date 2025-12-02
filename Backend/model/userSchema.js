@@ -30,6 +30,13 @@ const userSchema = new mongoose.Schema(
       {
         type: String,
         requred: true,
+        lowercase: true,
+      },
+    ],
+    createdBlogs: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Blog",
       },
     ],
     saveBlogs: [
