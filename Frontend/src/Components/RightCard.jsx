@@ -3,7 +3,7 @@ import '../CSS/RightCard.css';
 
 
 const RightCard = ({data}) => { 
-  console.log(data);  
+  // console.log(data);  
   return (
     <div className='Card-container'>
 

@@ -14,20 +14,17 @@ const Home = () => {
 
 
     const [data, setData] = useState([]);
-    const [shaffleData, setShaffleData] = useState([]);
 
     const fetchBlogs = async () => {
         try {
-            const res = await axios.get('http://localhost:4000/view', { 
-                withCredentials: true,
+            const res = await axios.get("http://localhost:4000/view", {
+              withCredentials: true,
             });
 
-            const blogs = res?.data?.data;
-            let random = Math.floor(Math.random() * blogs.length);
-            const shuffle_It = blogs[random];
-
-            setShaffleData(shuffle_It);
-            setData(res?.data?.data);
+            console.log(res);
+            const blogs = res?.data?.blogs;
+            console.log(blogs);
+            setData(blogs);
             dispatch(addBlog(res?.data?.data));
         } catch (error) {
             console.log("Error fetching blogs:", error);
@@ -38,7 +35,7 @@ const Home = () => {
         if (user) {
             fetchBlogs();
         } else {
-            setData([]); // clear blogs when user logs out
+            setData([]); 
         }
     }, [user]);
 
@@ -47,7 +44,7 @@ const Home = () => {
         <div >
             {
                 user ? (
-                    data.length > 0 ? (
+                    
                         <div className="main_container">
                             <div className="left_container1">
                                 <div className="feature_container">
@@ -58,7 +55,7 @@ const Home = () => {
                                 </div>
                                 <div className="Card_container" >
                                     {
-                                        data.map((e, _) => {
+                                        data?.map((e, _) => {
                                             return (
                                                 <div key={e._id} className="card">
                                                     <Card props={e} /> 
@@ -71,12 +68,10 @@ const Home = () => {
 
                             <div className="right_container">
                                 <h3>Stiff Picks</h3>
-                                <RightCard data={shaffleData} />
+                                <RightCard data={data} />
                             </div>
                         </div>
-                    ) : (
-                        <h2>No blogs found. Try adding one!</h2>
-                    )
+                    
                 ) : (
                     <HomeDesign />
                 )
