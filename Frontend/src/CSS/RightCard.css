@@ -1,8 +1,26 @@
 .Card-container{
     border: 1px solid thistle;
+    margin-bottom: 1.4rem;
 }
 
 .Card-container h3{
     font-family: var(--secondary-color);
 
+}
+
+.TypesContainer{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.5rem;
+    border: 1px solid red;
+    padding:0.5rem 0rem;
+}
+
+.TypesContainer button{
+    padding:0.6rem 1.7rem;
+    border-radius:1rem;
+    border:none;
+    font-family: var(--secondary-color);
+    font-weight:600;
+    font-style: var(--secondary-font);
 }

@@ -74,7 +74,9 @@ blogRoute.get("/view", requireAuth, async (req, res) => {
       userCategories = userCategories[0].split(",").map(c => c.trim());
     }
 
-    let blogs = await Blog.find({ createdBy: { $ne: UserId }})
+    let blogs = await Blog.find({ createdBy: { $ne: UserId } }).populate(
+      "createdBy"
+    );
 
     const filteredBlogs = blogs.filter(blog => {
       let blogCats = blog.categories;

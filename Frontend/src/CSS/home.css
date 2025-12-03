@@ -6,6 +6,7 @@
 .left_container1 {
   width: 67%;
   padding: 0rem;
+  min-height:90vh;
 }
 .feature_container {
   display: flex;
