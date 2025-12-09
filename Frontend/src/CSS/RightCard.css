@@ -57,6 +57,12 @@
   display: flex;
   gap: 0.5rem;
 }
+.profile p{
+  color: var(--secondary-color);
+  font-family: var(--secondary-font);
+  font-weight: 500;
+  font-size: 14px;
+}
 .profile > img {
   width: 35px;
   height: 35px;

@@ -14,7 +14,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 authRouter.post("/signup", upload.single('profilePic'), async (req, res) => {
 
     try {
-        const { firstname, lastname, email, password,categories } = req.body;
+        const { firstname, lastname, email, password,profession,categories } = req.body;
 
         if (!firstname || !lastname || !email || !password || !req.file) {
             return res.status(400).json({ message: "All fields including profilePic are required" });
@@ -38,6 +38,7 @@ authRouter.post("/signup", upload.single('profilePic'), async (req, res) => {
           lastname,
           email,
           password: hashPassword,
+          profession,
           profilePic: result.secure_url,
           categories,
         });

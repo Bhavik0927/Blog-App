@@ -76,7 +76,7 @@ const RightCard = () => {
                 <img src={d.profilePic} alt="" />
                 <div>
                   <h3>{d?.firstname} {d.lastname}</h3>
-                  <p></p>
+                  <p>{d.profession}</p>
                 </div>
               </div>
               <button className="Boxbtn">Follow</button>

@@ -10,8 +10,10 @@ const Signup = () => {
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [profession, setProfession] = useState("");
   const [profilePic, setProfilePic] = useState(null);
   const [categories, setCategories] = useState([]);
+
 
   const [step, setStep] = useState(1);
 
@@ -25,6 +27,7 @@ const Signup = () => {
     formData.append("lastname", lastname);
     formData.append("email", email);
     formData.append("password", password);
+    formData.append("profession", profession);
     formData.append("profilePic", profilePic);
     formData.append("categories", categories);
     try {
@@ -38,7 +41,7 @@ const Signup = () => {
       toast.success("Successfully Sign-up");
       Navigate("/login");
     } catch (error) {
-      toast.error("Something is wrong");
+      toast.error("Something is wrong",error?.message);
     }
   };
 
@@ -104,6 +107,19 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          
+          <div className="form-group">
+            <label htmlFor="Profession">Profession</label>
+            <input
+              type="texy"
+              name="Profession"
+              id="Profession"
+              required
+              value={profession}
+              onChange={(e) => setProfession(e.target.value)}
+            />
+          </div>
+
 
           <div className="form-group">
             <input

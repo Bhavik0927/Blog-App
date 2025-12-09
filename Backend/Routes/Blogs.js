@@ -13,7 +13,7 @@ blogRoute.post("/create", upload.single("blogImage"), async (req, res) => {
     const { title, subtitle, blog, categories } = req.body;
     const userId = req.user._id;
 
-    // console.log(req.body);
+    console.log(req.body);
     if (!title || !subtitle || !blog || !categories) {
       return res.status(400).json({
         error: "Title, blog content,categories and image are required.",
