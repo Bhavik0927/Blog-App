@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import store from './Store/Store';
 import EditBlog from './Pages/EditBlog';
 import { lazy, Suspense } from 'react';
+import MoreCategories from './Pages/MoreCategories';
 
 const EditProfile = lazy(() => import('./Pages/EditProfile'));
 const Myblogs = lazy(() => import('./Pages/MyProfile'));
@@ -33,6 +34,7 @@ const App = () => {
               <Route path='/about' element={<About />} />
               <Route path='/login' element={<Login />} />
               <Route path='/signup' element={<Signup />} />
+              <Route path='/see-more' element={<MoreCategories />} />
               <Route path='*' element={<h1>There is No Route</h1>} />
             </Route>
           </Routes>

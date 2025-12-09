@@ -1,26 +1,64 @@
-.Card-container{
-    border: 1px solid thistle;
-    margin-bottom: 1.4rem;
+.Card-container {
+  border: 1px solid thistle;
+  margin-bottom: 1.4rem;
 }
 
-.Card-container h3{
-    font-family: var(--secondary-color);
-
+.Card-container h3 {
+  font-family: var(--secondary-color);
 }
 
-.TypesContainer{
-    display:flex;
-    flex-wrap:wrap;
-    gap:0.5rem;
-    border: 1px solid red;
-    padding:0.5rem 0rem;
+.TypesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.7rem 0rem;
 }
 
-.TypesContainer button{
-    padding:0.6rem 1.7rem;
-    border-radius:1rem;
-    border:none;
-    font-family: var(--secondary-color);
-    font-weight:600;
-    font-style: var(--secondary-font);
+.TypesContainer button {
+  padding: 0.6rem 1.7rem;
+  border-radius: 1.7rem;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-style: var(--secondary-font);
+}
+
+.see_more {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--secondary-color);
+  cursor: pointer;
+}
+.see_more:hover{
+    text-decoration: underline grey 0.1rem;
+    text-underline-offset:2px
+}
+.Profile_Container {
+  margin: 1rem 0rem;
+}
+.Profile-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0px;
+  cursor: pointer;
+}
+
+.Boxbtn {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 1px solid var(--primary-color);
+  background-color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+}
+.profile {
+  display: flex;
+  gap: 0.5rem;
+}
+.profile > img {
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
 }
