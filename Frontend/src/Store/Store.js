@@ -3,6 +3,7 @@ import userReducer from './UserSlice';
 import blogReducer from './BlogSlice';
 import followerReducer from './FollowerSlice';
 import saveblogsReducer from './SaveBlogs';
+import ProfileReducer from './ProfileSlice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage
 import { combineReducers } from 'redux';
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     user: userReducer,
     blog: blogReducer,
     saveblogs: saveblogsReducer,
-    follower: followerReducer
+    follower: followerReducer,
+    Profile: ProfileReducer
 })
 
 

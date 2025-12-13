@@ -15,33 +15,33 @@ const Myblogs = lazy(() => import('./Pages/MyProfile'));
 const SaveBlogs = lazy(() => import('./Pages/SaveBlogs'));
 const FullBlog = lazy(() => import('./Pages/FullBlog'));
 const AddBlogCard = lazy(() => import("./Components/AddBlogCard"));
+const UserProfile = lazy(() => import("./Pages/UserProfile"));
 
 const App = () => {
   return (
-
     <Provider store={store}>
       <Router>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            <Route path='/' element={<Body />}>
-              <Route path='/' element={<Home />} />
-              <Route path='/card' element={<AddBlogCard />} />
-              <Route path='/edit-profile' element={<EditProfile />} />
-              <Route path='/myprofile' element={<Myblogs />} />
-              <Route path='/editblog/:id' element={<EditBlog />} />
-              <Route path='/saveblogs'  element={<SaveBlogs />} />
-              <Route path='/:username/:slug/:id' element={<FullBlog />} />
-              <Route path='/about' element={<About />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/signup' element={<Signup />} />
-              <Route path='/see-more' element={<MoreCategories />} />
-              <Route path='*' element={<h1>There is No Route</h1>} />
+            <Route path="/" element={<Body />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/card" element={<AddBlogCard />} />
+              <Route path="/edit-profile" element={<EditProfile />} />
+              <Route path="/myprofile" element={<Myblogs />} />
+              <Route path="/editblog/:id" element={<EditBlog />} />
+              <Route path="/saveblogs" element={<SaveBlogs />} />
+              <Route path="/:username/:slug/:id" element={<FullBlog />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/see-more" element={<MoreCategories />} />
+              <Route path="/profile/:id" element={<UserProfile />} />
+              <Route path="*" element={<h1>There is No Route</h1>} />
             </Route>
           </Routes>
         </Suspense>
       </Router>
     </Provider>
-
   );
 };
 
