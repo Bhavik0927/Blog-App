@@ -14,14 +14,15 @@ profileRoute.get("/profile", async (req, res) => {
   try {
     const token = req.cookies.token;
     if (!token) return res.status(404).json({ error: "token is not valid" });
-    const decoded_token = jwt.verify(token, process.env.SECRET_KEY);
+
+    const decoded_token = await jwt.verify(token, process.env.SECRET_KEY);
 
     const user = await User.findOne({ email: decoded_token.email });
     if (!user) return res.status(404).json({ error: "user is not found" });
 
     res.status(200).json(user);
   } catch (error) {
-    console.log(error);
+    res.status(401).json({error: error.message});
   }
 });
 
@@ -42,7 +43,7 @@ profileRoute.get("/AllProfiles", async (req, res) => {
       data: users,
     });
   } catch (err) {
-    console.log(err);
+    res.status(401).json({ error: error.message });
   }
 });
 
@@ -64,7 +65,7 @@ profileRoute.get("/profile/:id", async(req,res) =>{
       data: user,
     });
   } catch (error) {
-    res.status()
+    res.status(401).json({ error: error.message });
   }
 })
 

@@ -74,7 +74,11 @@ authRouter.post('/login', async (req, res) => {
             return res.status(401).json({ message: "Invalid credentials" });
         }
 
-        const token = await jwt.sign({ _id: existUser._id }, process.env.SECRET_KEY, { expiresIn: '1d' });
+        const token = await jwt.sign(
+          { _id: existUser._id, email: existUser.email },
+          process.env.SECRET_KEY,
+          { expiresIn: "1d" }
+        );
 
         res.cookie("token", token, {
             httpOnly: true,
