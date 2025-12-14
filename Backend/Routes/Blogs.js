@@ -57,47 +57,64 @@ const requireAuth = (req, res, next) => {
   next();
 };
 
-blogRoute.get("/view", requireAuth, async (req, res) => {
+
+blogRoute.get("/AllBlogs", requireAuth, async(req,res) =>{
   try {
     const UserId = req.user._id;
-    // console.log("Login User => ", UserId); 
+    console.log(UserId);
 
-    const user = await User.findById(UserId);
-    
-    if (!user) return res.status(404).json({ error: "User not found" });
-
-    let userCategories = user?.categories;
-
-    // console.log("Login User Intrests => ", userCategories);
-
-    if (userCategories.length === 1 && userCategories[0].includes(",")){
-      userCategories = userCategories[0].split(",").map(c => c.trim());
-    }
-
-    let blogs = await Blog.find({ createdBy: { $ne: UserId } }).populate(
-      "createdBy"
+    const blogs = await Blog.find({ createdBy: { $ne: UserId } }).populate(
+      "createdBy",
+      "firstname lastname profilePic"
     );
-
-    const filteredBlogs = blogs.filter(blog => {
-      let blogCats = blog.categories;
-
-      if(typeof blogCats === "string"){
-        blogCats = [blogCats.trim()];
-      }
-
-      return blogCats.some(cat => userCategories.includes(cat));
-    })
-
-
-    res.status(200).json({ 
-      count: filteredBlogs.length,
-      blogs: filteredBlogs
-     });
+    if(!blogs) return res.status(404).json({ error: "There is no blogs"})
+    res.status(200).json({ blogs: blogs})
   } catch (error) {
-    console.log(error);
-    res.status(402).json({ error: "There is no blog available" });
+    res.status(404).json({ message: error.message});
   }
-});
+})
+
+// blogRoute.get("/view", requireAuth, async (req, res) => {
+//   try {
+//     const UserId = req.user._id;
+//     // console.log("Login User => ", UserId); 
+
+//     const user = await User.findById(UserId);
+    
+//     if (!user) return res.status(404).json({ error: "User not found" });
+
+//     let userCategories = user?.categories;
+
+//     // console.log("Login User Intrests => ", userCategories);
+
+//     if (userCategories.length === 1 && userCategories[0].includes(",")){
+//       userCategories = userCategories[0].split(",").map(c => c.trim());
+//     }
+
+//     let blogs = await Blog.find({ createdBy: { $ne: UserId } }).populate(
+//       "createdBy"
+//     );
+
+//     const filteredBlogs = blogs.filter(blog => {
+//       let blogCats = blog.categories;
+
+//       if(typeof blogCats === "string"){
+//         blogCats = [blogCats.trim()];
+//       }
+
+//       return blogCats.some(cat => userCategories.includes(cat));
+//     })
+
+
+//     res.status(200).json({ 
+//       count: filteredBlogs.length,
+//       blogs: filteredBlogs
+//      });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(402).json({ error: "There is no blog available" });
+//   }
+// });
 
 blogRoute.get("/myblog", async (req, res) => {
   try {
