@@ -38,7 +38,7 @@ const AddBlogCard = () => {
       toast.success("Blog created successfully...");
       Navigate("/");
     } catch (error) {
-      console.log(error);
+      toast.error(error.message)
     } finally {
       setLoading(false);
     }

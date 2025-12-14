@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const blogSlice = createSlice({
     name:'blog',
     initialState:{
-        blog:[]
+        blog:null
     },
     reducers:{
         addBlog:(state,action) =>{
-            state.blog= action.payload;
+            state.blog = action.payload;
         },
         removeBlog:(state,action) =>{
             state.blog = null;

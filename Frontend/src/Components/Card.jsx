@@ -37,7 +37,7 @@ const Card = ({ props }) => {
             console.log(error)
         }
     }
-    // console.log(props);
+    console.log(props);
     const firstName = props?.createdBy?.firstname?.toLowerCase();
     const lastName = props?.createdBy?.lastname?.toLowerCase();
     const title = props.title.split(' ').join('-')

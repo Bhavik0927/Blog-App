@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { CategorieTypes } from "./Constant";
 import { Link } from "react-router-dom";
 import { addProfiles } from "../Store/ProfileSlice";
+import { toast } from "react-toastify";
+
 
 const RightCard = () => {
   const [data, setData] = useState([]);
@@ -18,8 +20,8 @@ const RightCard = () => {
 
   const CategorieType = CategorieTypes.map((c) => c.toLowerCase());
 
-  const remainingTypes = CategorieType.filter(
-    (type) => !userCategories.includes(type)
+  const remainingTypes = CategorieType?.filter(
+    (type) => !userCategories?.includes(type)
   );
 
   const RecommandedType = remainingTypes.map(
@@ -42,7 +44,7 @@ const RightCard = () => {
         if (error.name === "CanceledError") {
           toast.error("Request cancled");
         } else {
-          console.error(error);
+          toast.error(error.message);
         }
       }
     };
@@ -62,7 +64,7 @@ const RightCard = () => {
         <div>
           <p>
             <span>
-              <img src="" alt="" />
+              <img src="#" alt="aa" />
             </span>
             In The Riff by Eric Dockett
           </p>
@@ -76,8 +78,8 @@ const RightCard = () => {
       <div>
         <h3>Recommended topics</h3>
         <div className="TypesContainer">
-          {RecommandedType.slice(0, 8).map((data) => (
-            <button>{data}</button>
+          {RecommandedType.slice(0, 8).map((data,id) => (
+            <button key={id}>{data}</button>
           ))}
         </div>
         <p>

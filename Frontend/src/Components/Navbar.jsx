@@ -13,6 +13,8 @@ import { IoIosSearch } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => {
+
+  console.log("Navbar Page")
   const user = useSelector((store) => store.user?.user);
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)

@@ -2,82 +2,76 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addBlog } from "../Store/BlogSlice";
-import '../CSS/home.css';
+import "../CSS/home.css";
 import HomeDesign from "./HomeDesign";
-import Card from "../Components/Card";
-import RightCard from "../Components/RightCard";   
+import RightCard from "../Components/RightCard";
+import { toast } from "react-toastify";
+import { Link, Outlet } from "react-router-dom";
+
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state?.user?.user);
 
-    const dispatch = useDispatch();
-    const user = useSelector((state) => state.user.user);
+  const [blogsData, setBlogsData] = useState([]);
 
-
-    const [data, setData] = useState([]);
+  useEffect(() => {
+    const controller = new AbortController();
 
     const fetchBlogs = async () => {
-        try {
-            const res = await axios.get("http://localhost:4000/view", {
-              withCredentials: true,
-            });
-
-            console.log(res);
-            const blogs = res?.data?.blogs;
-            console.log(blogs);
-            setData(blogs);
-            dispatch(addBlog(res?.data?.data));
-        } catch (error) {
-            console.log("Error fetching blogs:", error);
-        }
+      try {
+        const res = await axios.get("http://localhost:4000/AllBlogs", {
+          withCredentials: true,
+          signal: controller.signal,
+        });
+        const blogs = res?.data?.blogs;
+        dispatch(addBlog(blogs));
+        setBlogsData(blogs);
+      } catch (error) {
+        toast.error(error.message);
+      }
     };
 
-    useEffect(() => {
-        if (user) {
-            fetchBlogs();
-        } else {
-            setData([]); 
-        }
-    }, [user]);
+    fetchBlogs();
 
+    return () => {
+      controller.abort();
+    };
+  }, []);
 
-    return (
-        <div >
-            {
-                user ? (
-                    
-                        <div className="main_container">
-                            <div className="left_container1">
-                                <div className="feature_container">
-                                    <p className="feature_btn">+</p>
-                                    <p className="feature_btn">For you</p>
-                                    <p className="feature_btn">Following</p>
-                                    <p className="feature_btn">Featured</p>
-                                </div>
-                                <div className="Card_container" >
-                                    {
-                                        data?.map((e, _) => {
-                                            return (
-                                                <div key={e._id} className="card">
-                                                    <Card props={e} /> 
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </div>
+  console.log("Home page");
 
-                            <div className="right_container">
-                                <h3>Stiff Picks</h3>
-                                <RightCard data={data} />
-                            </div>
-                        </div>
-                    
-                ) : (
-                    <HomeDesign />
-                )
-            }
+  return (
+    <div>
+      {user ? (
+        <div className="main_container">
+          <div className="left_container1">
+            <div className="feature_container">
+              <p className="feature_btn">+</p>
+              <Link to='/'>
+                <p className="feature_btn">For you</p>
+              </Link>
+              <Link>
+                <p className="feature_btn">Following</p>
+              </Link>
+              <Link to="/featured">
+                <p className="feature_btn">Featured</p>
+              </Link>
+            </div>
+
+            <Outlet context={{ blogsData }} />
+          </div>
+
+          <div className="right_container">
+            <h3>Stiff Picks</h3>
+            <RightCard data={blogsData} />
+          </div>
         </div>
-    );
-}
+      ) : (
+        <HomeDesign />
+      )}
+    </div>
+  );
+};
 
 export default Home;
