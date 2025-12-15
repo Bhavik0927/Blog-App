@@ -1,4 +1,3 @@
-
 export const CategorieTypes = [
   "Web Development",
   "Science",
@@ -32,4 +31,28 @@ export const CategorieTypes = [
   "Politics",
   "Productivity",
   "Other",
+];
+
+export const StaffPicks = [
+  {
+    title: "The Cure for Apathy Is Action: A Gardener's View of a Warming World",
+    subtitle: "Age of Empathy",
+    author: "Cindy Heath",
+    image: "https://images.unsplash.com/photo-1763908161617-3a0473ab01e8?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    date: "Nov 16",
+  },
+  {
+    title: "Bringing My Dad Back to Life on His Birthday",
+    subtitle: "Human Parts",
+    author: "Kelley Jhung",
+    image: "https://images.unsplash.com/photo-1764973637721-312bf4e7d77a?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    date: "Nov 24",
+  },
+  {
+    title: "Thirteen Years Illegal: Dreaming The Immigration Dream In Trying Times",
+    subtitle: "Age of Empathy",
+    author: "Jody Jenkins",
+    image:"https://plus.unsplash.com/premium_photo-1764240218699-18ce66851a07?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    date: "Dec 1",
+  },
 ];

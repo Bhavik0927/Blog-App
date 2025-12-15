@@ -11,7 +11,7 @@
 }
 .created_user_icon {
   height: 1.3rem;
-  width: 1.3rem;
+  width: 1.3rem; 
   border-radius: 15%;
 }
 
@@ -28,7 +28,7 @@
   margin: 0.6rem 0rem;
   display: flex;
   /* flex-wrap: wrap-reverse; */
-  gap: 2rem;
+  gap: 6rem;
 }
 
 .content_block {
@@ -45,7 +45,7 @@
 
 .content_block .paragraph {
   margin-top: 0.7rem; 
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   color: var(--secondary-color);
   font-family: var(--secondary-font);
@@ -78,7 +78,7 @@
 .date {
   color: var(--secondary-color);
   font-family: var(--secondary-font);
-  font-size: 0.9rem;
+  font-size: 1rem; 
 }
 .star {
   color: rgb(255, 183, 1);

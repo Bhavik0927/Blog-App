@@ -1,6 +1,47 @@
 .Card-container {
-  border: 1px solid thistle;
+  /* border: 1px solid thistle; */
   margin-bottom: 1.4rem;
+}
+
+.Stiff_card{
+  margin:0.8rem 0rem;
+}
+.Stiff_card h3{
+  margin:0.7rem 0rem;
+  font-size: 16.5px;
+  font: bold;
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+  font-style: normal;
+}
+.Stiff_card img{
+  width:20px;
+  height:20px;
+  border-radius:100%;
+}
+.stiff_card_upper{
+  display:flex;
+  gap:10px;
+}
+
+.stiff_card_upper p{
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+.stiff_card_upper p span{
+  color: var(--primary-color);
+}
+.Stiff_card .date_star{
+  display: flex;
+  gap:2rem;
+  color: var(--secondary-color);
+  font-family: var(--secondary-font);
+  font-size: 1rem; 
+}
+.Stiff_card .star{
+  margin-top: 1px;
+  color: rgb(255, 183, 1);
 }
 
 .Card-container h3 {
@@ -11,7 +52,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin: 0.7rem 0rem;
+  margin: 0.8rem 0rem;
 }
 
 .TypesContainer button {
@@ -22,6 +63,7 @@
   color: var(--primary-color);
   font-weight: 600;
   font-style: var(--secondary-font);
+  margin:0.2rem
 }
 
 .see_more {

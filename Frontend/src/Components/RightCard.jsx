@@ -6,7 +6,9 @@ import { CategorieTypes } from "./Constant";
 import { Link } from "react-router-dom";
 import { addProfiles } from "../Store/ProfileSlice";
 import { toast } from "react-toastify";
-
+import { CiBookmarkCheck } from "react-icons/ci";
+import { StaffPicks } from "./Constant";
+import { GiStarShuriken } from "react-icons/gi";
 
 const RightCard = () => {
   const [data, setData] = useState([]);
@@ -54,31 +56,35 @@ const RightCard = () => {
     return () => {
       controller.abort();
     };
-
-
   }, []);
 
   return (
     <>
       <div className="Card-container">
-        <div>
-          <p>
-            <span>
-              <img src="#" alt="aa" />
-            </span>
-            In The Riff by Eric Dockett
-          </p>
-        </div>
-        <h3>Ozzy Orzbone : The Legeacy of Madman</h3>
-        <p>
-          <span>star</span> date
-        </p>
+        {StaffPicks.map((data, idx) => (
+          <div key={idx} className="Stiff_card">
+            <div className="stiff_card_upper">
+              <img src={data?.image} alt={data?.subtitle} />
+              <p>
+                In <span>{data?.subtitle}</span> by
+                <span> {data?.author} </span>
+              </p>
+            </div>
+            <h3>{data?.title}</h3>
+            <p className="date_star">
+              <span className="star">
+                <GiStarShuriken />
+              </span>
+              {data?.date}
+            </p>
+          </div>
+        ))}
       </div>
 
       <div>
         <h3>Recommended topics</h3>
         <div className="TypesContainer">
-          {RecommandedType.slice(0, 8).map((data,id) => (
+          {RecommandedType.slice(0, 8).map((data, id) => (
             <button key={id}>{data}</button>
           ))}
         </div>
@@ -116,6 +122,17 @@ const RightCard = () => {
           </Link>
         </p>
       </div>
+
+      <h3>Reading List</h3>
+      <p>
+        Click{" "}
+        <span>
+          {" "}
+          <CiBookmarkCheck />{" "}
+        </span>{" "}
+        the on any story to easily add it to your reading list or a custom list
+        that you can share.
+      </p>
     </>
   );
 };
