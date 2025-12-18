@@ -22,8 +22,8 @@ authRouter.post("/signup", upload.single('profilePic'), async (req, res) => {
 
 
         // Check if user already exists early
-        const existUser = await User.findOne({ email });
-        if (existUser) {
+        const User = await User.findOne({ email });
+        if (User) {
             return res.status(409).json({ message: "User already exists" }); // 409 = Conflict
         }
 
@@ -63,19 +63,19 @@ authRouter.post('/login', async (req, res) => {
             return res.status(400).json({ message: "Email and password are required" });
         }
 
-        const existUser = await User.findOne({ email }).select('+password');
+        const User = await User.findOne({ email }).select('+password');
 
-        if (!existUser) {
+        if (!User) {
             return res.status(404).send({ message: "User is Not Exists" })
         }
-        const comparePassword = await bcrypt.compare(password, existUser.password);
+        const comparePassword = await bcrypt.compare(password, User.password);
 
         if (!comparePassword) {
             return res.status(401).json({ message: "Invalid credentials" });
         }
 
         const token = await jwt.sign(
-          { _id: existUser._id, email: existUser.email },
+          { _id: User._id, email: User.email },
           process.env.SECRET_KEY,
           { expiresIn: "1d" }
         );
@@ -86,7 +86,7 @@ authRouter.post('/login', async (req, res) => {
             sameSite: 'lax',// or 'None' if cross-site
             maxAge: 24 * 60 * 60 * 1000 // 1 day});
         })
-        res.status(200).json({ message: "Login successfully", token: token, existUser });
+        res.status(200).json({ message: "Login successfully", token: token, User });
 
     } catch (error) {
         console.error("Login error:", error);
