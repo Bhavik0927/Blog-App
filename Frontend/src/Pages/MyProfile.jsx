@@ -35,13 +35,14 @@ const MyProfile = () => {
             <div className="upper-container">
                 <div className="profile-left">
                     <img
-                        src={user?.profilePic || user?.existUser?.profilePic}
+                        src={user?.profilePic}
                         alt="Profile"
                         className="profile-image"
                     />
                     <h2 className="profile-name">
                         {user?.firstname || user?.existUser?.firstname} {user?.lastname || user?.existUser?.lastname}
                     </h2>
+                    <p className="profession">{user?.profession}</p>
                 </div>
 
 

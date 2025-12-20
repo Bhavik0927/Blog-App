@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 const Body = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user?.user);
+  // console.log("Body.jsx", user);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -43,7 +44,7 @@ const Body = () => {
   }, []);
 
 
-  console.log("Body Page")
+  // console.log("Body Page")
   return (
     <div
       style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}

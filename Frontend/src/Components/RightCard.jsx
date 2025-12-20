@@ -14,7 +14,7 @@ const RightCard = () => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
 
-  const user = useSelector((store) => store?.user?.user?.existUser);
+  const user = useSelector((store) => store?.user?.user);
 
   const userCategories = user?.categories[0]
     .split(",")

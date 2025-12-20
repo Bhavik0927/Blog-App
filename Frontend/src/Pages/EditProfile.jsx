@@ -9,14 +9,14 @@ import '../CSS/EditProfile.css'
 const EditProfile = () => {
 
     const user = useSelector((state) => state?.user?.user);
-    // console.log(user);
 
     const dispatch = useDispatch();
     const Navigate = useNavigate();
 
-    const [firstname, setFirstname] = useState(user?.existUser?.firstname || user?.firstname || '');
-    const [lastname, setLastName] = useState(user?.existUser?.lastname || user?.lastname || '');
-    const [email, setEmail] = useState(user?.existUser?.email || user?.email || '');
+    const [firstname, setFirstname] = useState(user?.firstname);
+    const [lastname, setLastName] = useState(user?.lastname);
+    const [profession, setProfession] = useState(user?.profession);
+    const [email, setEmail] = useState(user?.email);
     const [profilePic, setProfilePic] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -27,6 +27,7 @@ const EditProfile = () => {
         const formData = new FormData();
         formData.append('firstname', firstname);
         formData.append('lastname', lastname);
+        formData.append("profession", profession);
         formData.append('email', email);
 
         if (profilePic) {
@@ -42,7 +43,7 @@ const EditProfile = () => {
                     },
                 });
 
-            // console.log(res);
+            
             dispatch(addUser(res?.data?.user));
             toast.success('Update successfully...!! ');
             Navigate('/')
@@ -56,58 +57,67 @@ const EditProfile = () => {
 
 
     return (
+      <form onSubmit={handleSubmit} className="Profile_Container1">
+        <div className="form-group">
+          <label htmlFor="title">FirstName</label>
+          <input
+            id="title"
+            type="text"
+            value={firstname}
+            placeholder="firstname"
+            onChange={(e) => setFirstname(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="textarea">LastName</label>
 
-        <form onSubmit={handleSubmit} className='Profile_Container1'>
+          <input
+            type="text"
+            value={lastname}
+            placeholder="Write an blog"
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
 
-            <div className='form-group'>
-                <label htmlFor="title">FirstName</label>
-                <input
-                    id="title"
-                    type="text"
-                    value={firstname}
-                    placeholder="firstname"
-                    onChange={(e) => setFirstname(e.target.value)}
-                />
-            </div>
-            <div className='form-group'>
-                <label htmlFor="textarea">LastName</label>
 
-                <input
-                    type="text"
-                    value={lastname}
-                    placeholder="Write an blog"
-                    onChange={(e) => setLastName(e.target.value)}
-                />
-            </div>
+        <div className="form-group">
+          <label htmlFor="title">Email</label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            placeholder="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-            <div className='form-group'>
-                <label htmlFor="title">Email</label>
-                <input
-                    id="email"
-                    type="email"
-                    value={email}
-                    placeholder="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
+        <div className="form-group">
+          <label htmlFor="title">Profession</label>
+          <input
+            id="profession"
+            type="profession"
+            value={profession}
+            placeholder="profession"
+            onChange={(e) => setProfession(e.target.value)}
+          />
+        </div>
 
-            <div className='form-group'>
-                <input
-                    type="file"
-                    onChange={(e) => {
-                        setProfilePic(e.target.files[0]);
-                    }}
-                    
-                />
-            </div>
+        <div className="form-group">
+          <input
+            type="file"
+            onChange={(e) => {
+              setProfilePic(e.target.files[0]);
+            }}
+          />
+        </div>
 
-            <div className='form-actions'>
-                <button className="submit-btn" type='submit' disabled={loading} >
-                    {loading ? "Loading..." : "Submit"}
-                </button>
-            </div>
-        </form>
-    )
+        <div className="form-actions">
+          <button className="submit-btn" type="submit" disabled={loading}>
+            {loading ? "Loading..." : "Submit"}
+          </button>
+        </div>
+      </form>
+    );
 }
 
 export default EditProfile

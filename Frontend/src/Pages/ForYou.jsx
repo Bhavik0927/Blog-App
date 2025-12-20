@@ -4,13 +4,12 @@ import { useSelector } from "react-redux";
 
 const ForYou = () => {
   const { blogsData } = useOutletContext();
-
-  const login_userIntrest = useSelector((store) => store.user?.user);
-
-  const User_Intrest = login_userIntrest?.categories[0]
-    .split(",")
-    .map((c) => c.trim().toLowerCase());
-
+  
+  const login_userIntrest = useSelector((store) => store?.user?.user );
+  
+  const User_Intrest = login_userIntrest?.categories[0]?.split(",")
+  .map((c) => c.trim().toLowerCase());
+  
   const ForMe_Blogs = blogsData.filter(
     (blog) => User_Intrest?.includes(blog?.categories?.toLowerCase())
   );

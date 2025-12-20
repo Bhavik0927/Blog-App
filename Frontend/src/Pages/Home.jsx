@@ -39,7 +39,7 @@ const Home = () => {
     };
   }, []);
 
-  console.log("Home page");
+  // console.log("Home page");
 
   return (
     <div>

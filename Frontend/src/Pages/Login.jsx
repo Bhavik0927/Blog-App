@@ -18,7 +18,8 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const res = await axios.post('http://localhost:4000/login', { email, password }, { withCredentials: true });
-      dispatch(addUser(res.data));
+      console.log("While login => ",res);
+      dispatch(addUser(res.data.login_user));
       toast.success("Login Successfully");
       Navigate('/');
     } catch (error) {

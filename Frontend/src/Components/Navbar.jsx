@@ -14,8 +14,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => {
 
-  console.log("Navbar Page")
+  // console.log("Navbar Page")
   const user = useSelector((store) => store.user?.user);
+  // console.log("Navbar-User",user);
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const dropdownRef = useRef(null)
