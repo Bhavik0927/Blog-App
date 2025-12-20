@@ -1,6 +1,6 @@
 import express from "express";
 import bcrypt from 'bcrypt';
-import User from "../model/userSchema.js";
+import User from '../model/userSchema.js'
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import multer from 'multer';
@@ -22,9 +22,9 @@ authRouter.post("/signup", upload.single('profilePic'), async (req, res) => {
 
 
         // Check if user already exists early
-        const User = await User.findOne({ email });
-        if (User) {
-            return res.status(409).json({ message: "User already exists" }); // 409 = Conflict
+        const Signup_User = await User.findOne({ email });
+        if (Signup_User) {
+          return res.status(409).json({ message: "User already exists" }); // 409 = Conflict
         }
 
         const [hashPassword, result] = await Promise.all([
@@ -63,19 +63,20 @@ authRouter.post('/login', async (req, res) => {
             return res.status(400).json({ message: "Email and password are required" });
         }
 
-        const User = await User.findOne({ email }).select('+password');
-
-        if (!User) {
+        const login_user = await User.findOne({ email }).select('+password');
+        console.log(login_user);
+        
+        if (!login_user) {
             return res.status(404).send({ message: "User is Not Exists" })
         }
-        const comparePassword = await bcrypt.compare(password, User.password);
+        const comparePassword = await bcrypt.compare(password, login_user.password);
 
         if (!comparePassword) {
             return res.status(401).json({ message: "Invalid credentials" });
         }
 
         const token = await jwt.sign(
-          { _id: User._id, email: User.email },
+          { _id: login_user._id, email: login_user.email },
           process.env.SECRET_KEY,
           { expiresIn: "1d" }
         );
@@ -86,7 +87,7 @@ authRouter.post('/login', async (req, res) => {
             sameSite: 'lax',// or 'None' if cross-site
             maxAge: 24 * 60 * 60 * 1000 // 1 day});
         })
-        res.status(200).json({ message: "Login successfully", token: token, User });
+        res.status(200).json({ message: "Login successfully", token: token, login_user });
 
     } catch (error) {
         console.error("Login error:", error);
