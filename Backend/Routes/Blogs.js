@@ -13,7 +13,6 @@ blogRoute.post("/create", upload.single("blogImage"), async (req, res) => {
     const { title, subtitle, blog, categories } = req.body;
     const userId = req.user._id;
 
-    console.log(req.body);
     if (!title || !subtitle || !blog || !categories) {
       return res.status(400).json({
         error: "Title, blog content,categories and image are required.",
@@ -61,7 +60,6 @@ const requireAuth = (req, res, next) => {
 blogRoute.get("/AllBlogs", requireAuth, async(req,res) =>{
   try {
     const UserId = req.user._id;
-    console.log(UserId);
 
     const blogs = await Blog.find({ createdBy: { $ne: UserId } }).populate(
       "createdBy",

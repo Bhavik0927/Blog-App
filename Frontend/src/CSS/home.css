@@ -47,6 +47,25 @@
 }
 
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
 @media (max-width: 800px) {
   .main_container {
     justify-content: center;

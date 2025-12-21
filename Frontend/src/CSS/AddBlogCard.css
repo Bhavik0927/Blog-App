@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 88vh;
+  height: 93vh;
 }
 
 .close-btn {
@@ -11,7 +11,7 @@
   border-radius: 25px;
   cursor: pointer;
   font-weight: bold;
-  background-color: #dc3545;
+  background-color: var(--primary-color);
   color: white;
   margin-top: 20px;
 }
@@ -69,7 +69,7 @@
   border-radius: 5px;
   padding: 5px;
   outline: none;
-  border: 1px solid rgb(209, 198, 198);
+  border: 1px solid var(rgb(238, 230, 230));
 }
 
 .type-section{
@@ -86,7 +86,7 @@
 }
 #colse-icon {
   font-size: 27px;
-  background-color: #dc3545;
+  background-color: var(--primary-color);
   color: #fff;
 }
 

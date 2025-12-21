@@ -8,12 +8,13 @@ import RightCard from "../Components/RightCard";
 import { toast } from "react-toastify";
 import { Link, Outlet } from "react-router-dom";
 
-
 const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.user?.user);
 
   const [blogsData, setBlogsData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const blogsPerPage = 8;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -39,6 +40,41 @@ const Home = () => {
     };
   }, []);
 
+  useEffect(() =>{
+    smoothScrollToTop();
+  }, [currentPage])
+
+  const smoothScrollToTop = () =>{
+    const startPosition = window.pageXOffset;
+    const duration = 800;
+    let startTime = null;
+
+    const animation = (currentTime) =>{
+      if(startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+
+      const ease = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) /2;
+
+      window.scrollTo(0, startPosition * (1 - ease));
+
+      if(timeElapsed < duration){
+        requestAnimationFrame(animation)
+      }
+    }
+    requestAnimationFrame(animation);
+  }
+
+  const indexOfLastBlog = currentPage * blogsPerPage;
+  const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
+  const currentBlogs = blogsData.slice(indexOfFirstBlog, indexOfLastBlog);
+
+  const totalPages = Math.ceil(blogsData.length / blogsPerPage);
+
+  const handlePageChange = (newPage) =>{
+    setCurrentPage(newPage);
+  }
+
   // console.log("Home page");
 
   return (
@@ -48,7 +84,7 @@ const Home = () => {
           <div className="left_container1">
             <div className="feature_container">
               <p className="feature_btn">+</p>
-              <Link to='/'>
+              <Link to="/">
                 <p className="feature_btn">For you</p>
               </Link>
               <Link>
@@ -59,7 +95,27 @@ const Home = () => {
               </Link>
             </div>
 
-            <Outlet context={{ blogsData }} />
+            <Outlet context={{ blogsData: currentBlogs }} />
+
+            <div className="pagination">
+              <button
+                disabled={currentPage === 1}
+                onClick={() => handlePageChange(currentPage - 1)}
+              >
+                Prev
+              </button>
+
+              <span>
+                Page {currentPage} of {totalPages}
+              </span>
+
+              <button
+                disabled={currentPage === totalPages}
+                onClick={() => handlePageChange(currentPage + 1)}
+              >
+                Next
+              </button>
+            </div>
           </div>
 
           <div className="right_container">
