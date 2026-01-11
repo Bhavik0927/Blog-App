@@ -1,5 +1,7 @@
-import '../CSS/HomeDesign.css';
-import ideas from '../Images/ideas.png';
+// import '../CSS/HomeDesign.css';
+import '../shared/styles/CSS/HomeDesign.css';
+// import ideas from '../Images/ideas.png';
+import ideas from '../shared/assets/Images/ideas.png';
 
 const HomeDesign = () => {
   return (

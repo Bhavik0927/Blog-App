@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../CSS/AddBlogCard.css";
 import { toast } from "react-toastify";
-import { CategorieTypes } from "./Constant.jsx";
+import { CategorieTypes } from "../../shared/constants/Constant.jsx";
 
 const AddBlogCard = () => {
   const [title, setTitle] = useState("");

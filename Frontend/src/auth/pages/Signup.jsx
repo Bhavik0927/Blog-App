@@ -2,8 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import "../CSS/Signup.css";
-import Categories from "./Categories";
+import "../../shared/styles/CSS/Signup.css";
+import Categories from "../../Pages/Categories";
 
 const Signup = () => {
   const [firstname, setFirstName] = useState("");
@@ -13,7 +13,6 @@ const Signup = () => {
   const [profession, setProfession] = useState("");
   const [profilePic, setProfilePic] = useState(null);
   const [categories, setCategories] = useState([]);
-
 
   const [step, setStep] = useState(1);
 
@@ -41,7 +40,7 @@ const Signup = () => {
       toast.success("Successfully Sign-up");
       Navigate("/login");
     } catch (error) {
-      toast.error("Something is wrong",error?.message);
+      toast.error("Something is wrong", error?.message);
     }
   };
 
@@ -107,7 +106,7 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="Profession">Profession</label>
             <input
@@ -119,7 +118,6 @@ const Signup = () => {
               onChange={(e) => setProfession(e.target.value)}
             />
           </div>
-
 
           <div className="form-group">
             <input

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { addFollower, addFollowing } from '../Store/FollowerSlice';
+import { addFollower, addFollowing } from '../../Store/social/FollowerSlice';
 
 const FollowButton = ({ currentUser, targetUser }) => {
 

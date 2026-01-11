@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { addUser } from '../Store/UserSlice.js';
+import { addUser } from '../../Store/auth/UserSlice.js';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/EditProfile.css'

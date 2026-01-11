@@ -1,11 +1,8 @@
-import "../CSS/Categories.css";
-import {CategorieTypes} from '../Components/Constant';
-
-
+// import "../CSS/Categories.css";
+import '../shared/styles/CSS/Categories.css';
+import { CategorieTypes } from "../../shared/constants/Constant";
 
 const Categories = ({ categories, setCategories, prevStep, submit }) => {
-
-
   const toggleCategory = (data) => {
     if (categories.includes(data)) {
       setCategories(categories.filter((c) => c != data));
@@ -13,7 +10,6 @@ const Categories = ({ categories, setCategories, prevStep, submit }) => {
       setCategories([...categories, data]);
     }
   };
-
 
   return (
     <div className="Main_container">

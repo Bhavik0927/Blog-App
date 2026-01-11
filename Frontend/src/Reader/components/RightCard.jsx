@@ -1,13 +1,14 @@
-import "../CSS/RightCard.css";
+// import "../CSS/RightCard.css";
+import '../shared/styles/CSS/RightCard.css';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { CategorieTypes } from "./Constant";
+import { CategorieTypes } from "../../shared/constants/Constant";
 import { Link } from "react-router-dom";
-import { addProfiles } from "../Store/ProfileSlice";
+import { addProfiles } from "../../Store/profile/ProfileSlice";
 import { toast } from "react-toastify";
 import { CiBookmarkCheck } from "react-icons/ci";
-import { StaffPicks } from "./Constant";
+import { StaffPicks } from "../../shared/constants/Constant";
 import { GiStarShuriken } from "react-icons/gi";
 
 const RightCard = () => {

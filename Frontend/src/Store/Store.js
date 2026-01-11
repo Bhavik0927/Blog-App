@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './UserSlice';
-import blogReducer from './BlogSlice';
-import followerReducer from './FollowerSlice';
-import saveblogsReducer from './SaveBlogs';
-import ProfileReducer from './ProfileSlice';
+import userReducer from './auth/UserSlice';
+import blogReducer from './blog/BlogSlice';
+import followerReducer from './social/FollowerSlice';
+import saveblogsReducer from './blog/SaveBlogs';
+import ProfileReducer from './profile/ProfileSlice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage
 import { combineReducers } from 'redux';

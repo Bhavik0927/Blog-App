@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addBlog } from "../Store/BlogSlice";
-import "../CSS/home.css";
-import HomeDesign from "./HomeDesign";
+import { addBlog } from "../../Store/blog/BlogSlice";
+// import "../CSS/home.css";
+import '../shared/styles/CSS/home.css';
+import HomeDesign from "../../Pages/HomeDesign";
 import RightCard from "../Components/RightCard";
 import { toast } from "react-toastify";
 import { Link, Outlet } from "react-router-dom";
@@ -25,7 +26,7 @@ const Home = () => {
           withCredentials: true,
           signal: controller.signal,
         });
-        const blogs = res?.data?.blogs;
+        const blogs = await res?.data?.blogs;
         dispatch(addBlog(blogs));
         setBlogsData(blogs);
       } catch (error) {

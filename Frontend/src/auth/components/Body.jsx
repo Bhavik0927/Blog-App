@@ -2,14 +2,13 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { addUser } from "../Store/UserSlice";
+import { addUser } from "../Store/auth/UserSlice";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 const Body = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user?.user);
-  // console.log("Body.jsx", user);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -41,7 +40,7 @@ const Body = () => {
       controller.abort();
     };
 
-  }, []);
+  }, [user]);
 
 
   // console.log("Body Page")
