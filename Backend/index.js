@@ -7,12 +7,15 @@ import authRouter from './Routes/Authentication.js'
 import profileRoute from './Routes/Profile.js';
 import blogRoute from './Routes/Blogs.js';
 import { AuthMiddleware } from './utils/AuthMiddleware.js';
+import helmet from 'helmet';
 
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
+
+app.use(helmet());
 
 app.use(cors({
     origin: 'http://localhost:5173',

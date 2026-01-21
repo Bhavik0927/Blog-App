@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 const blogRoute = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
-blogRoute.post("/create", upload.single("blogImage"), async (req, res) => {  
+blogRoute.post("/create", upload.single("blogImage"), async (req, res) => {
   try {
     const { title, subtitle, blog, categories } = req.body;
     const userId = req.user._id;
@@ -29,14 +29,14 @@ blogRoute.post("/create", upload.single("blogImage"), async (req, res) => {
       createdBy: userId,
       blogImage: result.secure_url,
     });
-   
+
     await newBlog.save();
 
     await User.findByIdAndUpdate(
       userId,
-      { $push: {createdBlogs: newBlog._id } },
-      { new: true}
-    )
+      { $push: { createdBlogs: newBlog._id } },
+      { new: true },
+    );
 
     res
       .status(202)
@@ -56,22 +56,35 @@ const requireAuth = (req, res, next) => {
   next();
 };
 
+blogRoute.get("/AllBlogs", requireAuth, async (_, res) => {
+  try {
+    const blogs = await Blog.find().populate(
+      "createdBy",
+      "firstname lastname profilePic",
+    );
+    console.log(blogs);
+    if (!blogs) return res.status(404).json({ error: "There is no blogs" });
+    res.status(200).json({ blogs: blogs });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+});
 
-blogRoute.get("/AllBlogs", requireAuth, async(req,res) =>{
+
+blogRoute.get("/GetBlogs", requireAuth, async (req, res) => {
   try {
     const UserId = req.user._id;
 
     const blogs = await Blog.find({ createdBy: { $ne: UserId } }).populate(
       "createdBy",
-      "firstname lastname profilePic"
+      "firstname lastname profilePic",
     );
-    if(!blogs) return res.status(404).json({ error: "There is no blogs"})
-    res.status(200).json({ blogs: blogs})
+    if (!blogs) return res.status(404).json({ error: "There is no blogs" });
+    res.status(200).json({ blogs: blogs });
   } catch (error) {
-    res.status(404).json({ message: error.message});
+    res.status(404).json({ message: error.message });
   }
-})
-
+});
 
 blogRoute.get("/myblog", async (req, res) => {
   try {
@@ -97,7 +110,7 @@ blogRoute.get("/blog/:id", async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id).populate(
       "createdBy",
-      "firstname lastname email profilePic"
+      "firstname lastname email profilePic",
     );
     if (!blog) {
       return res.status(404).json({ message: "Blog not found" });
@@ -122,7 +135,6 @@ blogRoute.delete("/:id", async (req, res) => {
     await Blog.findByIdAndDelete(req.params.id);
 
     res.status(200).json({ message: "blog is successfully deleted" });
-    
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -138,7 +150,7 @@ blogRoute.put("/blog/:id", async (req, res) => {
     const updateBlog = await Blog.findByIdAndUpdate(
       req.params.id,
       { title, subtitle, blog, blogImage },
-      { new: true }
+      { new: true },
     ).lean();
 
     if (!updateBlog) {
@@ -195,7 +207,7 @@ blogRoute.post("/unsavedBlog", async (req, res) => {
   try {
     const result = await User.updateOne(
       { _id: userId },
-      { $pull: { saveBlogs: new mongoose.Types.ObjectId(blogId) } }
+      { $pull: { saveBlogs: new mongoose.Types.ObjectId(blogId) } },
     );
 
     if (result.modifiedCount === 0) {
