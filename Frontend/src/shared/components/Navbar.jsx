@@ -58,7 +58,7 @@ const Navbar = () => {
           </div>
 
           <div className='user-profile'>
-            <div onClick={() => Navigate('/card')} className='write-container'>
+            <div onClick={() => Navigate('writer/card')} className='write-container'>
               <span className='write-icon'><RiEditBoxLine /></span>
               <p>Write</p>
             </div>

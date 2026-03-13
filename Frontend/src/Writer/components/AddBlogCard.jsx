@@ -44,7 +44,7 @@ const AddBlogCard = () => {
     }
   };
   return (
-    <div className="container">
+    <div className="Blog_container">
       <div className="modal-overlay">
         <div className="modal-content">
           <form onSubmit={handleSubmit}>

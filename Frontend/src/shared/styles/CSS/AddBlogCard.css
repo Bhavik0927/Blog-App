@@ -1,8 +1,8 @@
-.container {
+.Blog_container {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 93vh;
+  height: 95vh;
 }
 
 .close-btn {
