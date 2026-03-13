@@ -43,7 +43,10 @@
   justify-content: center;
   margin-top: 1.5rem;
 }
-
+#email {
+  background: #f5f5f5;
+  cursor: not-allowed;
+}
 .submit-btn {
   background-color: #333;
   color: #fff;

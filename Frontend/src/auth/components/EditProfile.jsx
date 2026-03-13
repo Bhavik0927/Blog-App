@@ -29,7 +29,7 @@ const EditProfile = () => {
         formData.append('firstname', firstname);
         formData.append('lastname', lastname);
         formData.append("profession", profession);
-        formData.append('email', email);
+        // formData.append('email', email);
 
         if (profilePic) {
             formData.append('profilePic', profilePic);
@@ -87,6 +87,7 @@ const EditProfile = () => {
             id="email"
             type="email"
             value={email}
+            readOnly
             placeholder="email"
             onChange={(e) => setEmail(e.target.value)}
           />
