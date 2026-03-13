@@ -4,7 +4,8 @@ import axios from 'axios';
 import { addUser } from '../../Store/auth/UserSlice.js';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import '../CSS/EditProfile.css'
+// import '../../CSS/EditProfile.css'
+import '../../shared/styles/CSS/EditProfile.css';
 
 const EditProfile = () => {
 

@@ -3,14 +3,19 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../shared/styles/CSS/Signup.css";
-import Categories from "../../Pages/Categories";
+import Categories from "../../Reader/pages/Categories";
+import { FaPenNib } from "react-icons/fa";
+import { FaBookReader } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa6";
+import { FaEnvelope } from "react-icons/fa6";
+import { FaLock } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [profession, setProfession] = useState("");
+  const [role, setRole] = useState('');
   const [profilePic, setProfilePic] = useState(null);
   const [categories, setCategories] = useState([]);
 
@@ -22,11 +27,9 @@ const Signup = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("firstname", firstname);
-    formData.append("lastname", lastname);
     formData.append("email", email);
     formData.append("password", password);
-    formData.append("profession", profession);
+    formData.append("role", role);
     formData.append("profilePic", profilePic);
     formData.append("categories", categories);
     try {
@@ -49,91 +52,101 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
+      <h1>Join Connect </h1>
+      <p>Create your account and start your journey</p>
       {step === 1 && (
-        <form
-          className="signup-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            nextStep();
-          }}
-        >
-          <h2>Create Account</h2>
+        <>
+          <form
+            className="signup-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              nextStep();
+            }}
+          >
 
-          <div className="form-group">
-            <label htmlFor="firstName">First Name</label>
-            <input
-              type="text"
-              name="firstName"
-              id="firstName"
-              required
-              value={firstname}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="firstName">Username</label>
+              <FaRegUser className="user-icon" />
+              <input
+                name="userName"
+                id="userName"
+                placeholder="John Doe"
+                required
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              type="text"
-              name="lastName"
-              id="lastName"
-              required
-              value={lastname}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <FaEnvelope className="mail-icon" />
+              <input
+                name="email"
+                id="email"
+                placeholder="your@gmail.com"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <FaLock className="lock-icon" />
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="......."
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
 
-          <div className="form-group">
-            <label htmlFor="Profession">Profession</label>
-            <input
-              type="texy"
-              name="Profession"
-              id="Profession"
-              required
-              value={profession}
-              onChange={(e) => setProfession(e.target.value)}
-            />
-          </div>
+            <div className="form-group">
+              <label>I want to...</label>
 
-          <div className="form-group">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                setProfilePic(e.target.files[0]);
-              }}
-              className={{ marginBottom: "10px", color: "#fff" }}
-            />
-          </div>
+              <div className="role-selection">
+                <div
+                  className={`role-card ${role === "WRITER" ? "active" : ""}`}
+                  onClick={() => setRole("WRITER")}
+                >
+                  <FaPenNib />
+                  <span>Write Blogs</span>
+                </div>
 
-          <button type="submit" className="submit-btn">
-            Next
-          </button>
-        </form>
+                <div
+                  className={`role-card ${role === "READER" ? "active" : ""}`}
+                  onClick={() => setRole("READER")}
+                >
+                  <FaBookReader />
+                  <span>Read Blogs</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>Profile picture</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  setProfilePic(e.target.files[0]);
+                }}
+                className={{ marginBottom: "10px", color: "#fff" }}
+              />
+            </div>
+
+            <button type="submit" className="submit-btn">
+              Next
+            </button>
+            <div className="Bottom-container">
+              <p>Already have an account? <span><Link to='/login'>Sign in</Link></span> </p>
+            </div>
+          </form>
+        </>
       )}
 
       {step === 2 && (

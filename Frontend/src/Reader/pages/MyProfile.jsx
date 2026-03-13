@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from "react-redux";
-import '../CSS/MyProfile.css';
-import Myblogs from './Myblogs';
+import '../../shared/styles/CSS/MyProfile.css';
+// import Myblogs from './Myblogs';
+import Myblogs from '../components/Myblogs';
 import { toast } from 'react-toastify';
 
 const MyProfile = () => {
 
     const user = useSelector((store) => store.user?.user);
-    console.log(user);
 
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([]); 
 
     const fetchBlogs = async () => {
         const response = await axios.get('http://localhost:4000/myblog', { withCredentials: true });

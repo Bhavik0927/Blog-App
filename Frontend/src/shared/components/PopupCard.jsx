@@ -1,5 +1,6 @@
 import React from 'react';
-import '../CSS/PopupCard.css';
+// import '../CSS/PopupCard.css';
+import '../styles/CSS/PopupCard.css'
 
 
 const PopupCard = ({ blog }) => {

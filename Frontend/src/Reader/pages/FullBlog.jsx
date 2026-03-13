@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import '../CSS/FullBlog.css';
+// import '../CSS/FullBlog.css';
+import '../../shared/styles/CSS/FullBlog.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PiHandsClapping } from "react-icons/pi";
@@ -11,12 +12,12 @@ import { MdMoreHoriz } from "react-icons/md";
 import { toast } from 'react-toastify';
 import { LuLink } from "react-icons/lu";
 import { GiLinkedRings } from "react-icons/gi";
-import PopupCard from '../Components/PopupCard';
+import PopupCard from '../../shared/components/PopupCard';
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { useSelector } from 'react-redux';
-import FollowButton from '../Components/FollowButton';
+import FollowButton from '../../social/components/FollowButton';
 
 const FullBlog = () => {
 

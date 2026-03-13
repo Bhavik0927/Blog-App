@@ -1,0 +1,29 @@
+/* Explore Page Wrapper */
+.main_container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Each Card Wrapper */
+.container {
+  width: 100%;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Remove border from last card */
+.container:last-child {
+  border-bottom: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main_container {
+    padding: 1rem;
+  }
+}

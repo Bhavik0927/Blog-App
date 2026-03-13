@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import "../CSS/UserProfile.css";
+// import "../CSS/UserProfile.css";
+import '../../shared/styles/CSS/UserProfile.css';
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 
@@ -63,7 +64,6 @@ const UserProfile = () => {
         </div>
 
         <div className="profile-right">
-          <h3>Your Blogs</h3>
           {user1.createdBlogs?.length > 0 ? (
             <div className="blogs-grid">
               {user1?.createdBlogs?.map((blog) => (

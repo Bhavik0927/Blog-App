@@ -1,5 +1,6 @@
-// import "../CSS/Categories.css";
-import '../shared/styles/CSS/Categories.css';
+
+import '../../shared/styles/CSS/Categories.css';
+
 import { CategorieTypes } from "../../shared/constants/Constant";
 
 const Categories = ({ categories, setCategories, prevStep, submit }) => {

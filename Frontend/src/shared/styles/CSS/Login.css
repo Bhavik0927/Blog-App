@@ -1,243 +1,115 @@
-/* Container and layout */
+/* PAGE LAYOUT */
+
 .login-container {
-  display: flex;
   height: 100vh;
-  width: 100vw;
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
+  width: 100%;
+  background: #f5f5f5;
 
-/* LEFT PANEL */
-.left-panel {
-  flex: 1;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 20px;
-  min-width: 300px;
-}
-
-/* Superadmin button on top-left */
-.superadmin-button {
-  background-color: #2c2c2c;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 12px;
-  width: fit-content;
-}
-
-/* Footer at bottom-left */
-.logo-footer {
-  font-size: 14px;
-}
-
-/* RIGHT PANEL */
-.right-panel {
-  flex: 1;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  padding: 60px 80px;
-  box-sizing: border-box;
-  min-width: 320px;
 }
 
-/* Header */
-.login-header {
-  font-size: 24px;
+/* HEADER */
+
+.login-title {
+  font-size: 56px;
+  font-weight: 700;
+  font-family: serif;
+  margin-bottom: 8px;
+  font-family: var(--heading-font);
+}
+
+.login-subtitle {
+  color: #777;
   margin-bottom: 30px;
-  font-weight: bold;
+  font-size: 18px;
+  font-family: var(--heading-font);
 }
 
-/* Input group layout */
+/* CARD */
+
+.login-card {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  width: 420px;
+
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+/* INPUT GROUP */
+
 .input-group {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 22px;
 }
 
-/* Labels */
-.input-label {
-  font-size: 14px;
-  margin-bottom: 5px;
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
   font-weight: 500;
 }
 
-/* Inputs */
-.input-field {
-  padding: 15px;
+/* INPUT WITH ICON */
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+
+  border: 1px solid #ddd;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+
+  font-size: 15px;
   outline: none;
-  transition: border-color 0.3s ease;
 }
 
-.input-field:focus {
-  border-color: #1f2b2e;
+.input-wrapper input:focus {
+  border-color: #1e7d3b;
 }
 
-/* Login button */
+/* BUTTON */
+
 .login-button {
-  padding: 15px;
-  background-color: #1f2b2e;
+  width: 100%;
+  padding: 14px;
+  background: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 25px;
-  width: 150px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  transition: 0.2s;
 }
 
 .login-button:hover {
-  background-color: #162024;
+  background: #176431;
 }
 
-/* Footer link */
-.footer-link {
-  margin-top: 20px;
-  font-size: 12px;
+/* CREATE ACCOUNT */
+
+.create-account { 
+  text-align: center;
+  margin-top: 18px;
+  color: #666;
 }
 
-/* Responsive Styles */
-
-/* Mobile (max-width: 768px) */
-@media (max-width: 768px) {
-  .login-container {
-    /* border: 1px solid red; */
-    flex-direction: column;
-    height:100dvh;
-    width: 100%;
-    /* overflow-y: hidden; */
-  }
-
-  .left-panel {
-    display: none;
-  }
-
-  .right-panel {
-    width: 100%;
-    min-width: 100%;
-    height: 100vh;
-    padding: 60px 20px;
-    background-image: url("../Images/black2.jpg"); /* path relative to your css */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;
-    position: relative;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  /* Add a semi-transparent overlay for better readability */
-  .right-panel::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 0;
-  }
-
-  .right-panel > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Adjust header and text color */
-  .login-header,
-  .input-label,
-  .footer-link a {
-    color: white;
-  }
-
-  /* Input fields - make background semi-transparent for contrast */
-  .input-field {
-    background-color: rgba(255, 255, 255, 0.85);
-    color: #000;
-    border: none;
-  }
-
-  .input-field::placeholder {
-    color: #666;
-  }
-
-  .superadmin-button {
-    position: relative;
-    top: auto;
-    left: auto;
-    margin-bottom: 15px;
-  }
-
-  .logo-footer {
-    text-align: center;
-    font-size: 12px;
-  }
-
-  .right-panel {
-    order: 1;
-    padding: 20px 20px 40px;
-  }
-
-  .login-header {
-    font-size: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  .login-button {
-    width: 100%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  }
-}
-
-/* Tablet (min-width: 769px) and up */
-@media (min-width: 769px) and (max-width: 1023px) {
-  .login-container {
-    flex-direction: row;
-  }
-
-  .left-panel {
-    min-width: 40vw;
-  }
-
-  .right-panel {
-    min-width: 60vw;
-    padding: 40px 60px;
-  }
-
-  .login-header {
-    font-size: 22px;
-  }
-}
-
-/* Desktop (min-width: 1024px) */
-@media (min-width: 1024px) {
-  .left-panel {
-    min-width: 50vw;
-  }
-
-  .right-panel {
-    min-width: 50vw;
-  }
-
-  .login-header {
-    font-size: 26px;
-  }
-
-  .login-button {
-    width: 150px;
-  }
+.create-account span {
+  color: #1e7d3b;
+  font-weight: 600;
+  cursor: pointer;
 }

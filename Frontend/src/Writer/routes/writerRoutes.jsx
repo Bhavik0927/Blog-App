@@ -1,10 +1,10 @@
 import ProtectedRoute from "../../shared/routes/ProtectedRoutes";
 import { lazy } from "react";
 
-const AddBlogCard = lazy(() => import("../../Components/AddBlogCard"));
-const EditBlog = lazy(() => import("../../Pages/EditBlog"));
-const EditProfile = lazy(() => import("../../Pages/EditProfile"));
-const Myblogs = lazy(() => import("../../Pages/Myblogs"));
+const AddBlogCard = lazy(() => import("../components/AddBlogCard"));
+const EditBlog = lazy(() => import("../Pages/EditBlog"));
+const EditProfile = lazy(() => import("../../auth/components/EditProfile"));
+const Myblogs = lazy(() => import("../../Reader/components/Myblogs"));
 const SaveBlogs = lazy(() => import("../../Reader/pages/SaveBlogs"));
 
 

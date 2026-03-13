@@ -1,11 +1,12 @@
-import black2 from "../../shared/assets/Images/black2.jpg"
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../Store/auth/UserSlice";
 import { toast } from "react-toastify";
 import "../../shared/styles/CSS/login.css";
+import { FiMail } from "react-icons/fi";
+import { FiLock } from "react-icons/fi";
 
 const Login = () => {
   const Navigate = useNavigate();
@@ -32,53 +33,61 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="left-panel" style={{ backgroundImage: `url(${black2})` }}>
-        <button className="superadmin-button">Superadmin Login</button>
-        <div className="logo-footer">
-          © Nestvested Limited {new Date().getFullYear()}
-        </div>
-      </div>
 
-      <div className="right-panel">
-        <h2 className="login-header">Welcome, login to your account.</h2>
+      <h1 className="login-title">Welcome Back</h1>
+      <p className="login-subtitle">Sign in to continue your journey</p>
+
+      <div className="login-card">
 
         <div className="input-group">
           <label htmlFor="email" className="input-label">
             Email Address:
           </label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="name@domain.com"
-            className="input-field"
-          />
+          <div className="input-wrapper">
+            <FiMail className="input-icon" />
+
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="name@domain.com"
+              className="input-field"
+            />
+          </div>
+
         </div>
 
         <div className="input-group">
           <label htmlFor="password" className="input-label">
             Password:
           </label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Your Password"
-            className="input-field"
-          />
+          <div className="input-wrapper">
+            <FiLock className="input-icon" />
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Your Password"
+              className="input-field"
+            />
+          </div>
+
         </div>
 
         <button className="login-button" onClick={handleLogin}>
-          Sign In Here
+          Sign In 
         </button>
 
-        <div className="footer-link">
-          <a href="#">Lost your password?</a>
-        </div>
+         <p className="create-account">
+          Don't have an account? <span><Link to="/signup">Create one </Link> </span>
+        </p>
+
+
       </div>
     </div>
+
   );
 };
 

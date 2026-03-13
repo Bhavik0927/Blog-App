@@ -7,7 +7,7 @@ import axios from 'axios';
 import { removeUser } from '../../Store/auth/UserSlice';
 import { persistor } from '../../Store/Store';
 // import '../CSS/navbar.css';
-import '../shared/styles/CSS/navbar.css';
+import '../styles/CSS/navbar.css';
 import { toast } from 'react-toastify';
 import { RiEditBoxLine } from "react-icons/ri";
 import { IoIosSearch } from "react-icons/io";
@@ -68,7 +68,7 @@ const Navbar = () => {
               <img
                 src={user?.existUser?.profilePic || user?.profilePic}
                 alt="User"
-                className="user-icon"
+                className="user_icon"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               />
               {dropdownOpen && (

@@ -1,5 +1,5 @@
 // import "../CSS/RightCard.css";
-import '../shared/styles/CSS/RightCard.css';
+import '../../shared/styles/CSS/RightCard.css';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,8 +17,7 @@ const RightCard = () => {
 
   const user = useSelector((store) => store?.user?.user);
 
-  const userCategories = user?.categories[0]
-    .split(",")
+  const userCategories = user?.existUser?.categories
     .map((c) => c.toLowerCase());
 
   const CategorieType = CategorieTypes.map((c) => c.toLowerCase());

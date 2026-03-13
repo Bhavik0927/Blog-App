@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "../../shared/components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { addUser } from "../Store/auth/UserSlice";
+import { addUser } from "../../Store/auth/UserSlice";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
@@ -40,7 +40,7 @@ const Body = () => {
       controller.abort();
     };
 
-  }, [user]);
+  }, []);
 
 
   // console.log("Body Page")

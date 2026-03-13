@@ -2,9 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addBlog } from "../../Store/blog/BlogSlice";
-// import "../CSS/home.css";
-import '../shared/styles/CSS/home.css';
-import HomeDesign from "../../Pages/HomeDesign";
+import '../../shared/styles/CSS/home.css';
+import HomeDesign from "../../shared/pages/HomeDesign";
 import RightCard from "../Components/RightCard";
 import { toast } from "react-toastify";
 import { Link, Outlet } from "react-router-dom";
@@ -14,15 +13,17 @@ const Home = () => {
   const user = useSelector((state) => state?.user?.user);
 
   const [blogsData, setBlogsData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const blogsPerPage = 8;
 
   useEffect(() => {
     const controller = new AbortController();
+    
+    if(!user) return;
 
     const fetchBlogs = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/AllBlogs", {
+        const res = await axios.get("http://localhost:4000/GetBlogs ", {
           withCredentials: true,
           signal: controller.signal,
         });
@@ -69,6 +70,8 @@ const Home = () => {
   const indexOfLastBlog = currentPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
   const currentBlogs = blogsData.slice(indexOfFirstBlog, indexOfLastBlog);
+  console.log("Current Blogs", currentBlogs);
+  console.log("blogsData ==?", blogsData,);
 
   const totalPages = Math.ceil(blogsData.length / blogsPerPage);
 
@@ -81,7 +84,7 @@ const Home = () => {
   return (
     <div>
       {user ? (
-        <div className="main_container">
+        <div className="main-container">
           <div className="left_container1">
             <div className="feature_container">
               <p className="feature_btn">+</p>
@@ -100,7 +103,7 @@ const Home = () => {
 
             <div className="pagination">
               <button
-                disabled={currentPage === 1}
+                disabled={currentPage === 0}
                 onClick={() => handlePageChange(currentPage - 1)}
               >
                 Prev

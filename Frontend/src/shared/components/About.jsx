@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 // import "../CSS/About.css";
-import '../shared/styles/CSS/About.css';
+import '../../shared/styles/CSS/About.css';
 
 const About = () => {
   return (
@@ -42,7 +42,7 @@ const About = () => {
           <Link to="/login">
             <button className="primary-btn">Start Reading</button>
           </Link>
-          <Link to='/card'>
+          <Link to='/login'>
             <button className="secondary-btn">Start Writing</button>
           </Link>
         </div>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../CSS/AddBlogCard.css";
+import '../../shared/styles/CSS/AddBlogCard.css';
 import { toast } from "react-toastify";
 import { CategorieTypes } from "../../shared/constants/Constant.jsx";
 
