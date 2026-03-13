@@ -73,12 +73,11 @@ profileRoute.get("/profile/:id", async(req,res) =>{
 profileRoute.put( "/profile/edit", upload.single("profilePic"), async (req, res) => {
     try {
       const userId = req.user._id;
-      const { firstname, lastname, email,profession } = req.body;
+      const { firstname, lastname, profession } = req.body;
 
       const updateFields = {};
       if (firstname) updateFields.firstname = firstname;
       if (lastname) updateFields.lastname = lastname;
-      if (email) updateFields.email = email;
       if (profession) updateFields.profession = profession;
 
       if (req.file) {
