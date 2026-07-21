@@ -1,0 +1,93 @@
+import React, { useState, useEffect } from 'react';
+import { useSelector } from "react-redux";
+import '../../shared/styles/CSS/MyProfile.css';
+import Myblogs from '../components/Myblogs';
+import { toast } from 'react-toastify';
+import { api } from '../../shared/constants/Constant';
+
+const MyProfile = () => {
+
+    const user = useSelector((store) => store.user?.user);
+
+    const [data, setData] = useState([]); 
+
+    const fetchBlogs = async () => {
+        const response = await api.get('/myblog');
+        setData(response?.data);
+    }
+
+    const handleDelete = async (blogId) => {
+        try {
+            await api.delete(`/${blogId}`);
+            setData((prev) => prev.filter((blog) => blog._id !== blogId));
+            toast.success("deleted successfully...");
+        } catch (error) {
+            toast.error(error);
+        }
+    }
+    const [showConfirm, setShowConfirm] = useState(false);
+
+    useEffect(() => { fetchBlogs() }, []);
+
+    return (
+        <div className={`myprofile-container ${showConfirm ? 'blurred' : ''}`}>
+            <div className="upper-container">
+                <div className="profile-left">
+                    <img
+                        src={user?.profilePic}
+                        alt="Profile"
+                        className="profile-image"
+                    />
+                    <h2 className="profile-name">
+                        {user?.firstname || user?.existUser?.firstname} {user?.lastname || user?.existUser?.lastname}
+                    </h2>
+                    <p className="profession">{user?.profession}</p>
+                </div>
+
+
+                <div className="profile-right">
+                    <div className="profile-stat">
+                        <span className="stat-number">
+                            {user?.followers?.length ?? user?.existUser?.followers?.length ?? 0}
+                        </span>
+                        <span className="stat-label">Followers</span>
+                    </div>
+                    <div className="profile-stat">
+                        <span className="stat-number">
+                            {user?.following?.length ?? user?.existUser?.following?.length ?? 0}
+                        </span>
+                        <span className="stat-label">Following</span>
+                    </div>
+                    <div className="profile-stat">
+                        <span className="stat-number">{data?.length}</span>
+                        <span className="stat-label">Blogs</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div className="lower-container">
+                <h3>Your Blogs</h3>
+                {
+                    data?.length > 0 ? (
+                        data.map((e, _) => {
+                            return (
+                                <div key={e._id} className="card">
+                                    <Myblogs props={e} onDelete={handleDelete} showConfirm={showConfirm} setShowConfirm={setShowConfirm}/>
+                                </div>
+                            )
+                        })
+                    ) : (
+                        <div className="no-blog">
+                            <h1>You don't have any blog...</h1>
+                        </div>
+                    )
+                }
+            </div>
+        </div>
+    );
+};
+
+export default MyProfile;
+
+

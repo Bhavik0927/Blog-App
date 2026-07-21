@@ -1,0 +1,123 @@
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { addUser } from '../../Store/auth/UserSlice.js';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+// import '../../CSS/EditProfile.css'
+import '../../shared/styles/CSS/EditProfile.css';
+import { api } from '../../shared/constants/Constant.jsx';
+
+const EditProfile = () => {
+
+    const user = useSelector((state) => state?.user?.user);
+
+    const dispatch = useDispatch();
+    const Navigate = useNavigate();
+
+    const [firstname, setFirstname] = useState(user?.firstname);
+    const [lastname, setLastName] = useState(user?.lastname);
+    const [profession, setProfession] = useState(user?.profession);
+    const [email, setEmail] = useState(user?.email);
+    const [profilePic, setProfilePic] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        setLoading(true);
+        const formData = new FormData();
+        formData.append('firstname', firstname);
+        formData.append('lastname', lastname);
+        formData.append("profession", profession);
+
+        if (profilePic) {
+            formData.append('profilePic', profilePic);
+        }
+
+        try {
+            const res = await api.put('/profile/edit', formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+
+            
+            dispatch(addUser(res?.data?.user));
+            toast.success('Update successfully...!! ');
+            Navigate('/')
+        } catch (error) {
+            toast.error(error.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+
+    return (
+      <form onSubmit={handleSubmit} className="Profile_Container1">
+        <div className="form-group">
+          <label htmlFor="title">FirstName</label>
+          <input
+            id="title"
+            type="text"
+            value={firstname}
+            placeholder="firstname"
+            onChange={(e) => setFirstname(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="textarea">LastName</label>
+
+          <input
+            type="text"
+            value={lastname}
+            placeholder="Write an blog"
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
+
+
+        <div className="form-group">
+          <label htmlFor="title">Email</label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            readOnly
+            placeholder="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="title">Profession</label>
+          <input
+            id="profession"
+            type="profession"
+            value={profession}
+            placeholder="profession"
+            onChange={(e) => setProfession(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <input
+            type="file"
+            onChange={(e) => {
+              setProfilePic(e.target.files[0]);
+            }}
+          />
+        </div>
+
+        <div className="form-actions">
+          <button className="submit-btn" type="submit" disabled={loading}>
+            {loading ? "Loading..." : "Submit"}
+          </button>
+        </div>
+      </form>
+    );
+}
+
+export default EditProfile

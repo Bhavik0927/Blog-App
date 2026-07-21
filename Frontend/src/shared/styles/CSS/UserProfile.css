@@ -1,0 +1,156 @@
+/* MAIN CONTAINER */
+.profile-container {
+  display: flex;
+  gap: 30px;
+  padding: 30px;
+  max-width: 1100px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+/* LEFT SECTION */
+.profile-left {
+  flex: 1;
+  min-width: 280px;
+  max-width: 350px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #f1f1f1;
+}
+
+.profile-name {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.profile-bio {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.profile-info p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+/* RIGHT SECTION */
+.profile-right {
+  flex: 2;
+  min-width: 300px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-right h3 {
+  margin-bottom: 20px;
+}
+
+/* from here  */
+.blogs-grid {
+  transition: transform 0.4s ease;
+  display: flex;
+  gap: 1rem;
+  flex-wrap:wrap;
+  justify-content: center;
+}
+
+.blog-card {
+  position: relative; 
+  width: 250px;
+  height: 300px; /* FIXED CARD HEIGHT */
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease;
+  background: #000;
+}
+
+.blog-card img {
+  width: 100%;
+  height: 100%; /* FIXED IMAGE SIZE */
+  object-fit: cover; /* IMPORTANT */
+  object-position: center;
+  transition: transform 0.4s ease;
+}
+
+.blog-card:hover img {
+  transform: scale(1.1);
+}
+
+.blog-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.3));
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.blog-card:hover .blog-overlay {
+  opacity: 1;
+}
+
+.blog-overlay h4 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.blog-overlay p {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.blog-overlay small {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.category {
+  background: #ff5a5f;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
+/* Mobile Friendly */
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .profile-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .profile-left,
+  .profile-right {
+    width: 100%;
+  }
+  .blog-card {
+    height: 240px;
+  }
+}

@@ -1,0 +1,119 @@
+import { useState } from "react";
+import { IoClose } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
+import '../../shared/styles/CSS/AddBlogCard.css';
+import { toast } from "react-toastify";
+import { api, CategorieTypes } from "../../shared/constants/Constant.jsx";
+
+const AddBlogCard = () => {
+  const [title, setTitle] = useState("");
+  const [subtitle, setSubTitle] = useState("");
+  const [blog, setBlog] = useState("");
+  const [blogImage, setBlogImage] = useState(null);
+  const [Loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState("");
+
+  const Navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("subtitle", subtitle);
+    formData.append("blog", blog);
+    formData.append("blogImage", blogImage);
+    formData.append("categories", categories);
+
+    try {
+      await api.post("/create",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          }
+        });
+
+      toast.success("Blog created successfully...");
+      Navigate("/");
+    } catch (error) {
+      toast.error(error.message)
+    } finally {
+      setLoading(false);
+    }
+  };
+  return (
+    <div className="Blog_container">
+      <div className="modal-overlay">
+        <div className="modal-content">
+          <form onSubmit={handleSubmit}>
+            <div id="close-card" onClick={() => Navigate("/")}>
+              <IoClose id="colse-icon" />
+            </div>
+            <div id="title_area">
+              <label htmlFor="title">Title</label>
+              <input
+                id="title"
+                type="text"
+                placeholder="Title for blog"
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+            <div id="title_area">
+              <label htmlFor="title">Sub-Title</label>
+              <input
+                id="title"
+                type="text"
+                placeholder="Sub-title for blog"
+                onChange={(e) => setSubTitle(e.target.value)}
+              />
+            </div>
+            <div id="blog_area">
+              <label htmlFor="textarea">Blog</label>
+
+              <textarea
+                id="textarea"
+                placeholder="Write an blog"
+                onChange={(e) => setBlog(e.target.value)}
+              />
+            </div>
+
+            <div className="type-section">
+              <label htmlFor=""> Categories </label>
+              <select
+                value={categories}
+                onChange={(e) => setCategories(e.target.value)}
+              >
+                <option value="">select type</option>
+
+                {CategorieTypes?.map((type, index) => (
+                  <option key={index} value={type.toLocaleLowerCase()}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                setBlogImage(e.target.files[0]);
+              }}
+              className={{ marginBottom: "10px", color: "#fff" }}
+            />
+
+            <div className="close-area">
+              <button className="close-btn" type="submit">
+                {Loading ? "Loading..." : "Submit"}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AddBlogCard;
