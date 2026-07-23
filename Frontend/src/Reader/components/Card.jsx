@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { api } from "../../shared/constants/Constant";
+import AIsummaryCard from "../../shared/components/AIsummaryCard";
 
 
 const Card = ({ props }) => {
@@ -59,17 +60,25 @@ const Card = ({ props }) => {
 
                 <div className="main_content_container">
                     <div className="content_block">
-                        <Link to={`/@${firstName}${lastName}/${title}/${props._id}`}>
-                            <h3 className="title">{props?.title}</h3>
-                        </Link>
 
+                        <div className="content_left">
+                            <Link to={`/@${firstName}${lastName}/${title}/${props._id}`}>
+                                <h3 className="title">{props?.title}</h3>
+                            </Link>
+                            <AIsummaryCard props={props.aiSummary} />
+
+                            <p className="paragraph">
+                                {props.blog}
+                            </p>
+
+                        </div>
+
+                        
                         <div className="blog_image">
                             <img src={props?.blogImage} alt="" />
                         </div>
 
-                        <p className="paragraph">
-                            For the writer who doesn’t think they have anything to offer and why you're dead wrong
-                        </p>
+
                     </div>
                 </div>
 

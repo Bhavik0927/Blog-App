@@ -14,8 +14,11 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
 
   const handleLogin = async () => {
+    setLoading(true);
     try {
       const res = await api.post(
         "/login",
@@ -26,6 +29,8 @@ const Login = () => {
       Navigate("/");
     } catch (error) {
       toast.error("Invalid Credentials...", error.message);
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -75,7 +80,7 @@ const Login = () => {
         </div>
 
         <button className="login-button" onClick={handleLogin}>
-          Sign In 
+         {loading ? "Loading..." : "Sign In"} 
         </button>
 
          <p className="create-account">

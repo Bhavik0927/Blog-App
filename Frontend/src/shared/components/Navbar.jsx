@@ -22,7 +22,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const logout = async () => {
-    await api.post('/logout', null );
+    await api.post('/logout', null);
     dispatch(removeUser());
     persistor.purge();
     toast.success('Logout successfully...');
@@ -55,10 +55,18 @@ const Navbar = () => {
           </div>
 
           <div className='user-profile'>
-            <div onClick={() => Navigate('writer/card')} className='write-container'>
-              <span className='write-icon'><RiEditBoxLine /></span>
-              <p>Write</p>
-            </div>
+            {user.role !== 'READER' && (
+              <div
+                onClick={() => Navigate('writer/card')}
+                className='write-container'
+              >
+                <span className='write-icon'>
+                  <RiEditBoxLine />
+                </span>
+                <p>Write</p>
+              </div>
+            )}
+
 
             <div className="user-dropdown" ref={dropdownRef}>
               <p>Welcome {user?.existUser?.firstname || user?.firstname}</p>
@@ -96,7 +104,7 @@ const Navbar = () => {
             <li>
               <Link to='/about' className='our_story'>Our Story</Link>
             </li>
-            
+
             <li>
               <Link to='/signup' className='signup_btn'>Sign up</Link>
             </li>

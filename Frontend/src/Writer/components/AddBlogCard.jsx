@@ -1,117 +1,120 @@
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import '../../shared/styles/CSS/AddBlogCard.css';
 import { toast } from "react-toastify";
+import "../../shared/styles/CSS/AddBlogCard.css";
 import { api, CategorieTypes } from "../../shared/constants/Constant.jsx";
 
 const AddBlogCard = () => {
-  const [title, setTitle] = useState("");
-  const [subtitle, setSubTitle] = useState("");
-  const [blog, setBlog] = useState("");
-  const [blogImage, setBlogImage] = useState(null);
-  const [Loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState("");
+  const navigate = useNavigate();
 
-  const Navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const [subtitle, setSubtitle] = useState("");
+  const [blog, setBlog] = useState("");
+  const [category, setCategory] = useState("");
+  const [blogImage, setBlogImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setLoading(true);
     const formData = new FormData();
     formData.append("title", title);
     formData.append("subtitle", subtitle);
     formData.append("blog", blog);
     formData.append("blogImage", blogImage);
-    formData.append("categories", categories);
+    formData.append("categories", category);
 
     try {
-      await api.post("/create",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          }
-        });
+      setLoading(true);
 
-      toast.success("Blog created successfully...");
-      Navigate("/");
+      await api.post("/create", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      toast.success("Blog created successfully");
+      navigate("/");
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
   };
+
   return (
-    <div className="Blog_container">
-      <div className="modal-overlay">
-        <div className="modal-content">
-          <form onSubmit={handleSubmit}>
-            <div id="close-card" onClick={() => Navigate("/")}>
-              <IoClose id="colse-icon" />
-            </div>
-            <div id="title_area">
-              <label htmlFor="title">Title</label>
-              <input
-                id="title"
-                type="text"
-                placeholder="Title for blog"
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </div>
-            <div id="title_area">
-              <label htmlFor="title">Sub-Title</label>
-              <input
-                id="title"
-                type="text"
-                placeholder="Sub-title for blog"
-                onChange={(e) => setSubTitle(e.target.value)}
-              />
-            </div>
-            <div id="blog_area">
-              <label htmlFor="textarea">Blog</label>
+    <div className="blog-container">
+      <form className="blog-card" onSubmit={handleSubmit}>
+        <button
+          type="button"
+          className="close-btn-icon"
+          onClick={() => navigate("/")}
+        >
+          <IoClose />
+        </button>
 
-              <textarea
-                id="textarea"
-                placeholder="Write an blog"
-                onChange={(e) => setBlog(e.target.value)}
-              />
-            </div>
+        <h2>Create Blog</h2>
 
-            <div className="type-section">
-              <label htmlFor=""> Categories </label>
-              <select
-                value={categories}
-                onChange={(e) => setCategories(e.target.value)}
-              >
-                <option value="">select type</option>
+        <div className="input-group">
+          <label>Title</label>
+          <input
+            type="text"
+            placeholder="Enter blog title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
 
-                {CategorieTypes?.map((type, index) => (
-                  <option key={index} value={type.toLocaleLowerCase()}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-            </div>
+        <div className="input-group">
+          <label>Sub Title</label>
+          <input
+            type="text"
+            placeholder="Enter subtitle"
+            value={subtitle}
+            onChange={(e) => setSubtitle(e.target.value)}
+          />
+        </div>
 
+        <div className="input-group">
+          <label>Blog</label>
+          <textarea
+            placeholder="Write your blog..."
+            value={blog}
+            onChange={(e) => setBlog(e.target.value)}
+          />
+        </div>
+
+        <div className="row">
+          <div className="input-group">
+            <label>Category</label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="">Select Category</option>
+              {CategorieTypes.map((item) => (
+                <option key={item} value={item.toLowerCase()}>
+                  {item}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="input-group">
+            <label>Cover Image</label>
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => {
-                setBlogImage(e.target.files[0]);
-              }}
-              className={{ marginBottom: "10px", color: "#fff" }}
+              onChange={(e) => setBlogImage(e.target.files[0])}
             />
-
-            <div className="close-area">
-              <button className="close-btn" type="submit">
-                {Loading ? "Loading..." : "Submit"}
-              </button>
-            </div>
-          </form>
+          </div>
         </div>
-      </div>
+
+        <button className="submit-btn" disabled={loading}>
+          {loading ? "Creating..." : "Create Blog"}
+        </button>
+      </form>
     </div>
   );
 };

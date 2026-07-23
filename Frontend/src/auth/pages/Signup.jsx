@@ -12,11 +12,13 @@ import { Link } from "react-router-dom";
 import { api } from "../../shared/constants/Constant";
 
 const Signup = () => {
-  const [userName, setUserName] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState('');
   const [profilePic, setProfilePic] = useState(null);
+  const [profession, setProfession] = useState("");
   const [categories, setCategories] = useState([]);
 
   const [step, setStep] = useState(1);
@@ -27,23 +29,22 @@ const Signup = () => {
     e.preventDefault();
 
     const formData = new FormData();
+    formData.append("firstname",firstname);
+    formData.append("lastname",lastname);
     formData.append("email", email);
     formData.append("password", password);
     formData.append("role", role);
     formData.append("profilePic", profilePic);
+    formData.append('profession',profession);
     formData.append("categories", categories);
     try {
-      const res = await api.post("/signup", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        }
-        
-      });
+      await api.post("/signup", formData );
       toast.success("Successfully Sign-up");
       Navigate("/login");
     } catch (error) {
-      toast.error("Something is wrong", error?.message);
+     toast.error(error.response?.data?.message || error.message);
     }
+    
   };
 
   const nextStep = () => setStep((prev) => prev + 1);
@@ -64,15 +65,28 @@ const Signup = () => {
           >
 
             <div className="form-group">
-              <label htmlFor="firstName">Username</label>
-              <FaRegUser className="user-icon" />
+              <label htmlFor="">FirstName</label>
+              <FaRegUser className="user-icon1" />
               <input
-                name="userName"
-                id="userName"
-                placeholder="John Doe"
+                name="firstname"
+                id="firstname"
+                placeholder="John"
                 required
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                value={firstname}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="">LastName</label>
+              <FaRegUser className="user-icon2" />
+              <input
+                name="lastname"
+                id="lastname"
+                placeholder="Doe"
+                required
+                value={lastname}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
 
@@ -124,6 +138,17 @@ const Signup = () => {
                   <span>Read Blogs</span>
                 </div>
               </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="">Profession</label>
+              <input
+                name="profession"
+                id="profession"
+                required
+                value={profession}
+                onChange={(e) => setProfession(e.target.value)}
+              />
             </div>
 
             <div className="form-group">

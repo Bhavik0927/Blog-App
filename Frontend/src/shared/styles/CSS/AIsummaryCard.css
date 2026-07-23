@@ -1,0 +1,44 @@
+.ai_summary_card {
+  grid-area: paragraph;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 183, 1, 0.08),
+    rgba(255, 183, 1, 0.03)
+  );
+  border: 1px solid rgba(255, 1, 1, 0.2);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.ai_summary_card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 183, 1, 0.12);
+}
+
+.ai_summary_header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #f59e0b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ai_icon {
+  font-size: 1rem;
+}
+
+.ai_summary_text {
+  color: var(--secondary-color);
+  font-size: 0.95rem;
+  line-height: 1.7;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

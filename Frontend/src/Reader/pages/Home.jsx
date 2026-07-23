@@ -15,7 +15,7 @@ const Home = () => {
   const [blogsData, setBlogsData] = useState([]);
   const [loading,setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1);
-  const blogsPerPage = 8;
+  const blogsPerPage = 5;
 
   useEffect(() => {
     const controller = new AbortController();
