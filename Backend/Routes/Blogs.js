@@ -4,7 +4,7 @@ import multer from "multer";
 import { uploadToCloudinary } from "../utils/Cloudinary.js";
 import User from "../model/userSchema.js";
 import mongoose from "mongoose";
-import { generateSummary } from '../utils/aiSummary.js';
+import generateSummary from '../utils/aiSummary.js';
 
 const blogRoute = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -70,7 +70,6 @@ blogRoute.get("/AllBlogs", requireAuth, async (_, res) => {
       "createdBy",
       "firstname lastname profilePic",
     );
-    console.log(blogs);
     if (!blogs) return res.status(404).json({ error: "There is no blogs" });
     res.status(200).json({ blogs: blogs });
   } catch (error) {

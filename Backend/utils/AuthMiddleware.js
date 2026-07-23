@@ -6,7 +6,7 @@ dotenv.config();
 export const AuthMiddleware = async (req, res, next) => {
     const token = req.cookies.token;
 
-    console.log(token);
+    // console.log(token);
     if (!token) {
         return res.status(404).send({ error: 'token not found...!!' })
     }

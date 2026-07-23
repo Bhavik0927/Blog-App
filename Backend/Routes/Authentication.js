@@ -91,7 +91,7 @@ authRouter.post("/login", async (req, res) => {
       { expiresIn: "1d" }
     );
 
-    console.log(token);
+    // console.log(token);
 
     res.cookie("token", token, {
       httpOnly: true,
